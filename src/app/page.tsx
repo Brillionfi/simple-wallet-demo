@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { LoginTypes, getAuthorizationUrl } from "@/lib/url";
+import { getAuthorizationUrl } from "@/lib/get-authorization";
+import { LoginTypes } from "@/utils/types";
 import Link from "next/link";
 
 export default function Home() {

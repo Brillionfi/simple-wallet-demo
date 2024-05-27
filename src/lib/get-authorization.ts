@@ -1,11 +1,4 @@
-enum OAuthProviders {
-  Google = "Google",
-}
-
-export enum LoginTypes {
-  ApiUser = "API_USER",
-  WalletUser = "WALLET_USER",
-}
+import { LoginTypes, OAuthProviders } from "@/utils/types";
 
 export function getAuthorizationUrl(loginType: LoginTypes) {
   const params = {
