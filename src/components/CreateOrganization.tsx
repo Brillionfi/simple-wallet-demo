@@ -28,7 +28,9 @@ export const CreateOrganization = ({ jwt }: { jwt: string }) => {
           </p>
         )}
       </div>
-      <Button onClick={() => logOut(jwt)}>Log Out</Button>
+      <Button onClick={() => logOut(jwt)} variant={"destructive"}>
+        Log Out
+      </Button>
     </div>
   );
 };

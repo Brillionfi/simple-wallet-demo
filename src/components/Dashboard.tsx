@@ -3,6 +3,7 @@
 import { LoginTypes } from "@/utils/types";
 import { ApplicationsManager } from "./ApplicationsManager";
 import { SessionManager } from "./SessionManager";
+import { WalletManager } from "./WalletManager";
 
 export const Dashboard = ({
   json,
@@ -19,6 +20,7 @@ export const Dashboard = ({
       {role !== LoginTypes.WalletUser && (
         <ApplicationsManager jwt={jwt} role={role} />
       )}
+      {role === LoginTypes.WalletUser && <WalletManager />}
     </div>
   );
 };
