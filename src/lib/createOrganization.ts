@@ -1,7 +1,13 @@
 import { BASE_URL } from "@/utils/constants";
 import { v4 as uuidv4 } from "uuid";
+import { logOut } from "./logOut";
+import { Dispatch, SetStateAction } from "react";
 
-export async function createOrganization(token: string) {
+export async function createOrganization(
+  token: string,
+  setError: Dispatch<SetStateAction<boolean>>
+) {
+  setError(false);
   const name = document.getElementById("name") as HTMLInputElement;
   const response = await fetch(`${BASE_URL}/organizations`, {
     method: "POST",
@@ -20,12 +26,17 @@ export async function createOrganization(token: string) {
   console.log(jwt);
   const answer = await response.json();
   console.log(answer);
-  if (answer.organization?.name === name && answer.status === "ACTIVE") {
-    window.location.href = "http://localhost:3000";
-  } else if (
-    answer.message?.includes("This user already have an organization")
+  if (
+    answer.organization?.name === name.value &&
+    answer.organization?.status === "ACTIVE"
   ) {
-    // user already has org, show error
+    console.log("logging out");
+    logOut(token);
+  } else if (
+    answer.message?.includes("This user already have an organization") ||
+    answer.message?.includes("please chose another name")
+  ) {
+    setError(true);
   } else {
     // show unknown error
   }

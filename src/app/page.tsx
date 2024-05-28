@@ -10,11 +10,8 @@ export default function Home() {
   loginIfSession();
   return (
     <main className="flex min-h-screen items-center gap-6 p-24">
-      <Button>
+      <Button asChild>
         <Link href={getAuthorizationUrl(LoginTypes.ApiUser)}>Dashboard</Link>
-      </Button>
-      <Button>
-        <Link href={getAuthorizationUrl(LoginTypes.WalletUser)}>Wallet</Link>
       </Button>
     </main>
   );
