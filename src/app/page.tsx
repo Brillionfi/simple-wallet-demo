@@ -1,23 +1,21 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
-import { getAuthorizationUrl } from "@/lib/get-authorization";
+import { getAuthorizationUrl } from "@/lib/getAuthorization";
+import { loginIfSession } from "@/lib/loginIfSession";
 import { LoginTypes } from "@/utils/types";
 import Link from "next/link";
 
 export default function Home() {
+  loginIfSession();
   return (
-    <main className="flex min-h-screen flex-col items-center justify-around p-24">
-      <div className="flex justify-center flex-col items-center gap-3">
-        <h2>CMS Login</h2>
-        <Button asChild>
-          <Link href={getAuthorizationUrl(LoginTypes.ApiUser)}>
-            Log in with Google
-          </Link>
-        </Button>
-      </div>
-      <div className="flex justify-center flex-col items-center gap-3">
-        <h2>Wallet Login</h2>
-        <Button>Log in with Google</Button>
-      </div>
+    <main className="flex min-h-screen items-center gap-6 p-24">
+      <Button>
+        <Link href={getAuthorizationUrl(LoginTypes.ApiUser)}>Dashboard</Link>
+      </Button>
+      <Button>
+        <Link href={getAuthorizationUrl(LoginTypes.WalletUser)}>Wallet</Link>
+      </Button>
     </main>
   );
 }

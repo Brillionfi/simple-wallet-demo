@@ -7,3 +7,9 @@ export enum LoginTypes {
   WalletUser = "WALLET_USER",
   OrgOwner = "ORG_OWNER",
 }
+
+export type TApplication = {
+  apiKey: string;
+  name: string;
+  status: "ACTIVE";
+};
