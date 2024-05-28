@@ -78,7 +78,7 @@ const ShowDashboard = ({
           <h2>Session</h2>
           <Button onClick={() => logOut(jwt)}>Log Out</Button>
         </div>
-        <pre className="text-gray-500 bg-slate-50 py-6 px-10 rounded-md border border-solid border-slate-200">
+        <pre className="text-gray-500 bg-slate-50 py-6 px-10 rounded-md border border-solid border-slate-200 text-sm">
           {json}
         </pre>
       </div>
@@ -86,7 +86,7 @@ const ShowDashboard = ({
         <div className="flex gap-5 flex-col w-full">
           <h2>Applications</h2>
           {apps?.length && (
-            <table className="rounded-md overflow-hidden text-gray-500 border-solid border-slate-200">
+            <table className="rounded-md overflow-hidden text-gray-500 border-solid border-slate-200 text-sm">
               <thead className="bg-slate-100">
                 <tr>
                   <th className="text-center font-normal border-slate-200 border py-2 px-3">
