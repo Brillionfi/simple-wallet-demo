@@ -20,6 +20,7 @@ export type TAuthType = "passkey";
 
 export type TWallet = {
   format: TChain;
+  address: string;
   name: string;
   owner: string;
   type: string;

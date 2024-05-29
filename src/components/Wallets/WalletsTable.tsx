@@ -8,19 +8,38 @@ export const WalletsTable = ({ wallets }: { wallets: TWallet[] }) => {
     <table className="rounded-md overflow-hidden text-gray-500 border-solid border-slate-200 text-sm">
       <thead className="bg-slate-100">
         <tr>
-          <th className={thStyle}>Format</th>
-          <th className={thStyle}>Name</th>
           <th className={thStyle}>Owner</th>
-          <th className={thStyle}>Type</th>
+          <th className={thStyle}>Format</th>
+          <th className={thStyle}>Address</th>
+          <th className={thStyle}>Name</th>
         </tr>
       </thead>
       <tbody>
         {wallets.map((wallet, index) => (
           <tr className={`bg-slate-50 bg-sl`} key={index}>
+            <td className={`${tdStyle}`}>{wallet.owner}</td>
             <td className={`${tdStyle} w-1/12`}>{wallet.format}</td>
-            <td className={`${tdStyle}`}>{wallet.name}</td>
-            <td className={`${tdStyle} w-1/12`}>{wallet.owner}</td>
-            <td className={`${tdStyle} w-1/12`}>{wallet.type}</td>
+            <td className={`${tdStyle} w-1/12`}>
+              <CopyHelper
+                clipboard={wallet.address}
+                content={`${wallet.address.slice(
+                  0,
+                  6
+                )}...${wallet.address.slice(
+                  wallet.address.length - 4,
+                  wallet.address.length
+                )}`}
+              />
+            </td>
+            <td className={`${tdStyle} w-1/12`}>
+              <CopyHelper
+                clipboard={wallet.name}
+                content={`${wallet.name.slice(0, 4)}...${wallet.name.slice(
+                  wallet.name.length - 4,
+                  wallet.name.length
+                )}`}
+              />
+            </td>
           </tr>
         ))}
       </tbody>

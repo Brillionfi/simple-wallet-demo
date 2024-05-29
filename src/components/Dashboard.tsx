@@ -13,7 +13,7 @@ export const Dashboard = ({
   role: LoginTypes;
 }) => {
   return (
-    <div className="flex flex-col min-h-screen items-center gap-10 w-[500px] justify-center">
+    <div className="flex flex-col min-h-screen items-center gap-10 w-[600px] justify-center">
       <SessionManager json={json} jwt={jwt} />
       {role !== LoginTypes.WalletUser && (
         <ApplicationsManager jwt={jwt} role={role} />
