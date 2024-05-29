@@ -16,7 +16,9 @@ export const Dashboard = ({
   const title = payload.orgName;
   return (
     <div className="flex flex-col min-h-screen items-center gap-10 w-[600px] justify-center">
-      <h1 className="text-xl">{title}</h1>
+      <h1 className="text-xl">
+        {title ? "Dashboard for " + title : "Application"}
+      </h1>
       <SessionManager json={json} jwt={jwt} />
       {role !== LoginTypes.WalletUser && (
         <ApplicationsManager jwt={jwt} role={role} />

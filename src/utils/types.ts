@@ -14,7 +14,7 @@ export type TApplication = {
   status: "ACTIVE";
 };
 
-export type TChain = "ethereum" | "cosmos" | "tron";
+export type TChain = "ethereum" | "cosmos" | "tron" | "solana";
 
 export type TAuthType = "passkey";
 

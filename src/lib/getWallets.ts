@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 
 export const getWallets = (jwt: string) => {
   const { data } = useQuery({
-    refetchInterval: 3000,
+    refetchInterval: 6000,
     queryKey: ["GetWalletsList"],
     queryFn: async () => {
       const response = await fetch(`${BASE_URL}/wallets`, {

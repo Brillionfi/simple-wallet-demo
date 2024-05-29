@@ -22,6 +22,7 @@ export const WalletInput = ({ jwt }: { jwt: string }) => {
         <SelectContent>
           <SelectItem value="ethereum">Ethereum</SelectItem>
           <SelectItem value="cosmos">Cosmos</SelectItem>
+          <SelectItem value="solana">Solana</SelectItem>
           <SelectItem value="tron">Tron</SelectItem>
         </SelectContent>
       </Select>
