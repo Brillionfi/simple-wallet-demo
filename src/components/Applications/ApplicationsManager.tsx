@@ -17,7 +17,7 @@ export const ApplicationsManager = ({
     <div className="flex gap-5 flex-col w-full">
       <h2>Applications</h2>
       <ApplicationInput jwt={jwt} setLastAppName={setLastAppName} />
-      {apps?.length && <ApplicationsTable apps={apps} />}
+      {!!apps?.length && <ApplicationsTable apps={apps} />}
     </div>
   );
 };

@@ -10,7 +10,7 @@ export const WalletsManager = ({ jwt }: { jwt: string }) => {
         <h2>Wallets</h2>
       </div>
       <WalletInput jwt={jwt} />
-      {wallets?.length && <WalletsTable wallets={wallets} />}
+      {!!wallets?.length && <WalletsTable wallets={wallets} />}
     </div>
   );
 };

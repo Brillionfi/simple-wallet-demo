@@ -1,6 +1,5 @@
 import { createOrganization } from "@/lib/createOrganization";
 import { logOut } from "@/lib/logOut";
-import { Link } from "lucide-react";
 import { useState } from "react";
 import { Button } from "./ui/button";
 import { Input } from "./ui/input";
@@ -18,8 +17,8 @@ export const CreateOrganization = ({ jwt }: { jwt: string }) => {
             id="name"
             autoComplete={"off"}
           />
-          <Button asChild onClick={() => createOrganization(jwt, setError)}>
-            <Link href="">Create</Link>
+          <Button onClick={() => createOrganization(jwt, setError)}>
+            Create
           </Button>
         </div>
         {isError && (
