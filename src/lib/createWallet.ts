@@ -20,7 +20,7 @@ export async function createWallet(
           walletName: `Wallet-${authType}-${Math.round(
             Math.random() * 1000000
           )}`,
-          walletFormat: authType,
+          walletFormat: chain,
           authenticationType: {
             challenge: "FsAxSlgRXHR7o-ePTrRreH8gm-OZVix8V3wlSqJQ50w",
             attestation: {

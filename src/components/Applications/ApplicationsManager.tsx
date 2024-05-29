@@ -1,7 +1,4 @@
-import { createApp } from "@/lib/createApplication";
 import { LoginTypes } from "@/utils/types";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import { useState } from "react";
 import { getApplications } from "@/lib/getApplications";
 import { ApplicationsTable } from "./ApplicationsTable";
@@ -19,8 +16,8 @@ export const ApplicationsManager = ({
   return (
     <div className="flex gap-5 flex-col w-full">
       <h2>Applications</h2>
-      {apps?.length && <ApplicationsTable apps={apps} />}
       <ApplicationInput jwt={jwt} setLastAppName={setLastAppName} />
+      {apps?.length && <ApplicationsTable apps={apps} />}
     </div>
   );
 };

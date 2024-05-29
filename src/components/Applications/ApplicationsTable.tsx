@@ -1,10 +1,9 @@
 import { getAuthorizationUrl } from "@/lib/getAuthorization";
 import { LoginTypes, type TApplication } from "@/utils/types";
-import { Button } from "./ui/button";
-import { Copy } from "lucide-react";
+import { Button } from "./../ui/button";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
-import { CopyHelper } from "./ui/copy";
+import { CopyHelper } from "./../ui/copy";
 
 export const ApplicationsTable = ({ apps }: { apps: TApplication[] }) => {
   const thStyle = "text-center font-normal border-slate-200 border py-2 px-3";

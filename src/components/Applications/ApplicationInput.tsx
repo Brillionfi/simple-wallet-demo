@@ -1,7 +1,7 @@
 import { type Dispatch, type SetStateAction, useState } from "react";
-import { Button } from "./ui/button";
-import { Input } from "./ui/input";
 import { createApp } from "@/lib/createApplication";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 export const ApplicationInput = ({
   jwt,

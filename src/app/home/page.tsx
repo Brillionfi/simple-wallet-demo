@@ -6,7 +6,7 @@ import { LoginTypes } from "@/utils/types";
 import { CreateOrganization } from "@/components/CreateOrganization";
 import { Dashboard } from "@/components/Dashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 const queryClient = new QueryClient();
 

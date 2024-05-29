@@ -17,3 +17,10 @@ export type TApplication = {
 export type TChain = "ethereum" | "cosmos" | "tron";
 
 export type TAuthType = "passkey";
+
+export type TWallet = {
+  format: TChain;
+  name: string;
+  owner: string;
+  type: string;
+};

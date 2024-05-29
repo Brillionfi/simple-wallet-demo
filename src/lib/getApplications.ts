@@ -1,5 +1,5 @@
 import { BASE_URL } from "@/utils/constants";
-import { LoginTypes, TApplication } from "@/utils/types";
+import { LoginTypes, type TApplication } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 
 export const getApplications = (
