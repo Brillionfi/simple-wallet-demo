@@ -34,7 +34,7 @@ export const WalletInput = ({ jwt }: { jwt: string }) => {
         </SelectContent>
       </Select>
       <Button
-        onClick={() => createWallet(chain!, authType!, jwt)}
+        onClick={() => createWallet(chain!, jwt)}
         disabled={!authType || !chain}
       >
         Create

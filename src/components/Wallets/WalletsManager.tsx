@@ -7,7 +7,7 @@ export const WalletsManager = ({ jwt }: { jwt: string }) => {
   return (
     <div className="flex gap-5 flex-col w-full">
       <div className="flex w-full justify-between items-end">
-        <h2>Wallet</h2>
+        <h2>Wallets</h2>
       </div>
       <WalletInput jwt={jwt} />
       {wallets?.length && <WalletsTable wallets={wallets} />}

@@ -26,7 +26,7 @@ export default function () {
   return jwt && json && payload ? (
     payload?.role !== LoginTypes.ApiUser ? (
       <QueryClientProvider client={queryClient}>
-        <Dashboard json={json} jwt={jwt} role={payload.role as LoginTypes} />
+        <Dashboard json={json} jwt={jwt} payload={payload} />
       </QueryClientProvider>
     ) : (
       <CreateOrganization jwt={jwt} />

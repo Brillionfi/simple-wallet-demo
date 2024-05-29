@@ -25,8 +25,8 @@ export const ApplicationsTable = ({ apps }: { apps: TApplication[] }) => {
             <td className={`${tdStyle} w-1/12`}>
               <CopyHelper
                 clipboard={app.apiKey}
-                content={`${app.apiKey.slice(0, 4)}...${app.apiKey.slice(
-                  app.apiKey.length - 4,
+                content={`${app.apiKey.slice(0, 6)}...${app.apiKey.slice(
+                  app.apiKey.length - 6,
                   app.apiKey.length
                 )}`}
               />
@@ -37,6 +37,7 @@ export const ApplicationsTable = ({ apps }: { apps: TApplication[] }) => {
                 <Link
                   href={getAuthorizationUrl(LoginTypes.WalletUser, app.apiKey)}
                   target="_blank"
+                  className={"h-0"}
                 >
                   <ExternalLink size={15} className={"stroke-gray-500"} />
                 </Link>
