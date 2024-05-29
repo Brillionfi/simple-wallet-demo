@@ -13,3 +13,7 @@ export type TApplication = {
   name: string;
   status: "ACTIVE";
 };
+
+export type TChain = "ethereum" | "cosmos" | "tron";
+
+export type TAuthType = "passkey";

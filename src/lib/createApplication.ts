@@ -24,7 +24,5 @@ export async function createApp(
   }).then((res) => res.json());
   if (response.name) {
     setLastAppName(appName);
-    nameInput.value = "";
-    pKeyInput.value = "";
   }
 }

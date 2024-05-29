@@ -7,33 +7,42 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import { useState } from "react";
+import type { TAuthType, TChain } from "@/utils/types";
 
-export const WalletManager = () => {
+export const WalletManager = ({ jwt }: { jwt: string }) => {
+  const [chain, setChain] = useState<TChain>();
+  const [authType, setAuthType] = useState<TAuthType>();
   return (
     <div className="flex gap-5 flex-col w-full">
       <div className="flex w-full justify-between items-end">
         <h2>Wallet</h2>
       </div>
       <div className="flex justify-between gap-5 w-full">
-        <Select>
+        <Select onValueChange={(value: TChain) => setChain(value)}>
           <SelectTrigger>
             <SelectValue placeholder="Wallet type" />
           </SelectTrigger>
           <SelectContent>
             <SelectItem value="ethereum">Ethereum</SelectItem>
-            <SelectItem value="solana">Solana</SelectItem>
+            <SelectItem value="cosmos">Cosmos</SelectItem>
+            <SelectItem value="tron">Tron</SelectItem>
           </SelectContent>
         </Select>
-        <Select>
+        <Select onValueChange={(value: TAuthType) => setAuthType(value)}>
           <SelectTrigger>
             <SelectValue placeholder="Authentication type" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="biometric">Biometric</SelectItem>
             <SelectItem value="passkey">Passkey</SelectItem>
           </SelectContent>
         </Select>
-        <Button onClick={createWallet}>Create</Button>
+        <Button
+          onClick={() => createWallet(chain!, authType!, jwt)}
+          disabled={!authType || !chain}
+        >
+          Create
+        </Button>
       </div>
     </div>
   );

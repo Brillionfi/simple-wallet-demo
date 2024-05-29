@@ -10,5 +10,5 @@ export function loginIfSession() {
     if (jwt?.split(".").length === 3) {
       window.location.href = "http://localhost:3000/home?code=" + jwt;
     }
-  }, [document.cookie]);
+  }, []);
 }

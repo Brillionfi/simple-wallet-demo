@@ -1,5 +1,3 @@
-"use client";
-
 import { LoginTypes } from "@/utils/types";
 import { ApplicationsManager } from "./ApplicationsManager";
 import { SessionManager } from "./SessionManager";
@@ -20,7 +18,7 @@ export const Dashboard = ({
       {role !== LoginTypes.WalletUser && (
         <ApplicationsManager jwt={jwt} role={role} />
       )}
-      {role === LoginTypes.WalletUser && <WalletManager />}
+      {role === LoginTypes.WalletUser && <WalletManager jwt={jwt} />}
     </div>
   );
 };

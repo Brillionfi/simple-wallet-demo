@@ -1,5 +1,6 @@
 import { logOut } from "@/lib/logOut";
 import { Button } from "./ui/button";
+import { CopyHelper } from "./ui/copy";
 
 export const SessionManager = ({
   json,
@@ -16,9 +17,18 @@ export const SessionManager = ({
           Log Out
         </Button>
       </div>
-      <pre className="text-gray-500 bg-slate-50 py-3 px-5 rounded-md border border-solid border-slate-200 text-xs">
-        {json}
-      </pre>
+      <div className={"relative"}>
+        <pre className="text-gray-500 bg-slate-50 py-3 px-5 rounded-md border border-solid border-slate-200 text-xs">
+          {json}
+        </pre>
+        <div
+          className={
+            "absolute right-1 bottom-1 p-1 border border-slate-200 rounded-md bg-white"
+          }
+        >
+          <CopyHelper clipboard={jwt} content="JWT" />
+        </div>
+      </div>
     </div>
   );
 };

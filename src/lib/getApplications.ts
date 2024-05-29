@@ -7,7 +7,7 @@ export const getApplications = (
   jwt: string,
   lastAppName: string
 ) => {
-  const { data: applications } = useQuery({
+  const { data } = useQuery({
     enabled: role === LoginTypes.OrgOwner,
     queryKey: ["GetApplicationsList", lastAppName],
     queryFn: async () => {
@@ -22,5 +22,5 @@ export const getApplications = (
       return apps;
     },
   });
-  return applications;
+  return data;
 };

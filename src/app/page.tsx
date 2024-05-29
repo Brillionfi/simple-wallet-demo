@@ -11,7 +11,9 @@ export default function Home() {
   return (
     <main className="flex min-h-screen items-center gap-6 p-24">
       <Button asChild>
-        <Link href={getAuthorizationUrl(LoginTypes.ApiUser)}>Log in</Link>
+        <Link href={getAuthorizationUrl(LoginTypes.ApiUser)}>
+          Dashboard log in
+        </Link>
       </Button>
     </main>
   );
