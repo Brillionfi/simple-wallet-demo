@@ -3,7 +3,6 @@
 import { useSearchParams } from "next/navigation";
 import { jwtDecode } from "@/utils/jwt-decode";
 import { LoginTypes } from "@/utils/types";
-import { CreateOrganization } from "@/components/CreateOrganization";
 import { Dashboard } from "@/components/Dashboard";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
@@ -21,15 +20,16 @@ export default function () {
     const info = JSON.parse(jwtDecode(jwt?.split(".")[1]));
     setPayload(info);
     setJson(JSON.stringify(info, undefined, 2));
-    document.cookie = `session=${jwt}`;
+    document.cookie = `session-wallet=${jwt}`;
   }, [searchParams, setJwt, setPayload, setJson]);
-  return jwt && json && payload ? (
-    payload?.role !== LoginTypes.ApiUser ? (
+  return (
+    jwt &&
+    json &&
+    payload &&
+    payload?.role === LoginTypes.WalletUser && (
       <QueryClientProvider client={queryClient}>
         <Dashboard json={json} jwt={jwt} payload={payload} />
       </QueryClientProvider>
-    ) : (
-      <CreateOrganization jwt={jwt} />
     )
-  ) : null;
+  );
 }

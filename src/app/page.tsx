@@ -7,12 +7,12 @@ import { LoginTypes } from "@/utils/types";
 import Link from "next/link";
 
 export default function Home() {
-  loginIfSession();
+  // loginIfSession();
   return (
     <main className="flex min-h-screen items-center gap-6 p-24">
       <Button asChild>
         <Link href={getAuthorizationUrl(LoginTypes.ApiUser)}>
-          Dashboard log in
+          Wallet log in
         </Link>
       </Button>
     </main>
