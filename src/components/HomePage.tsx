@@ -20,6 +20,7 @@ export default function () {
     setJson(JSON.stringify(info, undefined, 2));
     document.cookie = `session-wallet=${jwt}`;
   }, [searchParams, setJwt, setPayload, setJson]);
+  console.log(payload);
   return (
     jwt &&
     json &&

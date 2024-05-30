@@ -19,8 +19,8 @@ export default function Home() {
         value={appId}
         onChange={(e) => setAppId(e.target.value)}
       />
-      <Button disabled={!appId}>
-        <Link href={getAuthorizationUrl(LoginTypes.ApiUser, appId)}>
+      <Button disabled={!appId} asChild={!!appId}>
+        <Link href={getAuthorizationUrl(LoginTypes.WalletUser, appId)}>
           Log into wallet app
         </Link>
       </Button>
