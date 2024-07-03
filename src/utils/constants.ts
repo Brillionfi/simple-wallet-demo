@@ -1,2 +1,3 @@
-export const BASE_URL =
-  "https://tdudyygzo8.execute-api.eu-west-1.amazonaws.com/stage";
+export const BASE_URL = "https://astrak.dev.brillion.finance";
+
+export const USE_API = false;

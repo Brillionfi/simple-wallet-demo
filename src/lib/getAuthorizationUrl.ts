@@ -5,7 +5,7 @@ export function getAuthorizationUrl(loginType: LoginTypes, appId?: string) {
   const params = {
     oAuthProvider: OAuthProviders.Google,
     loginType,
-    redirectUrl: "http://localhost:3000/home",
+    redirectUrl: "http://localhost:3000/healthcheck",
   };
   const url = new URL(`${BASE_URL}/users/login`);
   const query = new URLSearchParams(appId ? { ...params, appId } : params);
