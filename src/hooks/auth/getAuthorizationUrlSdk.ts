@@ -1,4 +1,4 @@
-import { AuthProvider, WalletInfra } from "@brillionfi/wallet-infra-sdk";
+import {AuthProvider, WalletInfra} from "@brillionfi/wallet-infra-sdk";
 
 export function getAuthorizationUrlSdk(appId: string) {
   const walletInfra = new WalletInfra(
