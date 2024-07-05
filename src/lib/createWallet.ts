@@ -1,7 +1,7 @@
-import { BASE_URL } from "@/utils/constants";
-import type { TChain } from "@/utils/types";
-import { v4 as uuidv4 } from "uuid";
-import { getWebAuthnAttestation } from "@turnkey/http";
+import {BASE_URL} from "@/utils/constants";
+import type {TChain} from "@/utils/types";
+import {v4 as uuidv4} from "uuid";
+import {getWebAuthnAttestation} from "@turnkey/http";
 
 export async function createWallet(chain: TChain, token: string) {
   const walletName = `Wallet-${chain}-${Math.round(Math.random() * 1000000)}`;

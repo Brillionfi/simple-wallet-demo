@@ -1,6 +1,7 @@
-import { LoginTypes } from "@/utils/types";
-import { SessionManager } from "./SessionManager";
-import { WalletsManager } from "./Wallets/WalletsManager";
+import {LoginTypes} from "@/utils/types";
+import {SessionManager} from "./SessionManager";
+import {WalletsManager} from "./Wallets/WalletsManager";
+import {useEffect} from "react";
 
 export const Dashboard = ({
   json,
