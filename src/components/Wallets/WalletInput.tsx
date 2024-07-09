@@ -11,11 +11,12 @@ import {Button} from "../ui/button";
 import {createWallet} from "@/lib/createWallet";
 import {useWalletInfraSdk} from "@/hooks/useWalletInfraSdk";
 import {WalletFormats} from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+import {SUPPORTED_CHAINS} from "@brillionfi/wallet-infra-sdk/dist/models/common.models";
 
 export const WalletInput = ({jwt}: {jwt: string}) => {
   const [chain, setChain] = useState<TChain | null>(null);
   const [authType, setAuthType] = useState<TAuthType | null>(null);
-  const {createWalletSdk} = useWalletInfraSdk();
+  const {createWalletSdk, getWalletPortfolioSdk} = useWalletInfraSdk();
 
   const handleCreateWallet = async () => {
     if (!chain || !authType) return;
@@ -24,10 +25,18 @@ export const WalletInput = ({jwt}: {jwt: string}) => {
 
     if (useSdk) {
       // todo: retrieve wallet name from user input
+      // todo: show wallet balance in the UI
       const walletName = "wallet-test-name";
       const walletFormat = chain.toLowerCase() as WalletFormats;
       const wallet = await createWalletSdk(walletName, walletFormat);
       console.log("Wallet created:", wallet);
+
+      const {portfolio} = await getWalletPortfolioSdk(
+        wallet.address as string,
+        SUPPORTED_CHAINS.ETHEREUM_SEPOLIA
+      );
+
+      console.log("Wallet balance:", portfolio[0].balance);
     } else {
       await createWallet(chain, jwt);
     }
