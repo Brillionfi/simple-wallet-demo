@@ -14,6 +14,7 @@ export const Dashboard = ({
   payload: Record<string, string>;
 }) => {
   const [account, setAccount] = useState<string>();
+
   const [format, setFormat] = useState<string>();
   const role = payload.role as LoginTypes;
   return (
@@ -32,7 +33,6 @@ export const Dashboard = ({
           <Portfolio jwt={jwt} account={account} format={format} />
         )}
       </div>
-
     </div>
   );
 };
