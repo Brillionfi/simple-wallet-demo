@@ -1,3 +1,4 @@
+
 import { getPortfolioByChain } from "@/lib/getPortfolioByChain";
 import { getChainsForFormat } from "@/utils/getChainsForFormat";
 import { useState } from "react";
@@ -31,7 +32,6 @@ export function Portfolio({
           <i className="text-xs"> - ({account})</i>
         </div>
       </div>
-
       {assets && (
         <table className="rounded-md overflow-hidden text-gray-500 border-solid border-slate-200 text-sm relative">
           <thead className="bg-slate-100">

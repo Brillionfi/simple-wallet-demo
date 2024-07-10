@@ -32,6 +32,7 @@ export const Dashboard = ({
           <Portfolio jwt={jwt} account={account} format={format} />
         )}
       </div>
+
     </div>
   );
 };
