@@ -1,7 +1,17 @@
+import type { IWallet } from "@brillionfi/wallet-infra-sdk";
 import { CopyHelper } from "../ui/copy";
-import { TWallet } from "@/utils/types";
 
-export const WalletsTable = ({ wallets }: { wallets: TWallet[] }) => {
+export const WalletsTable = ({
+  wallets,
+  account,
+  setAccount,
+  setChain,
+}: {
+  wallets: IWallet[];
+  account?: string;
+  setAccount: (address: string) => void;
+  setChain: (address: string) => void;
+}) => {
   const thStyle = "text-center font-normal border-slate-200 border py-2 px-3";
   const tdStyle = "px-3 border-slate-200 border";
   return (
@@ -21,13 +31,18 @@ export const WalletsTable = ({ wallets }: { wallets: TWallet[] }) => {
             <td className={`${tdStyle} w-1/12`}>{wallet.format}</td>
             <td className={`${tdStyle} w-1/12`}>
               <CopyHelper
-                clipboard={wallet.address}
-                content={`${wallet.address.slice(
+                action={() => {
+                  setAccount(wallet.address!);
+                  setChain(wallet.format);
+                }}
+                selected={wallet.address === account}
+                clipboard={wallet.address as string}
+                content={`${wallet.address?.slice(
                   0,
                   6
-                )}...${wallet.address.slice(
-                  wallet.address.length - 4,
-                  wallet.address.length
+                )}...${wallet.address?.slice(
+                  wallet.address?.length - 4,
+                  wallet.address?.length
                 )}`}
               />
             </td>

@@ -42,10 +42,10 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@brillionfi/wallet-infra-sdk@^0.3.1-050e63f.0":
-  version "0.3.1-050e63f.0"
-  resolved "https://registry.yarnpkg.com/@brillionfi/wallet-infra-sdk/-/wallet-infra-sdk-0.3.1-050e63f.0.tgz#30ef9a71f7545165d5e2aab0b227d81415528923"
-  integrity sha512-K0JrIWW1zpkGo6YvdMF8CvOK4n0zr6h18u58ICHkQiv3xHsSxSCMQbI1dcC+m1AIAmOZG8Ic1rf2YYJn5nnXjg==
+"@brillionfi/wallet-infra-sdk@^0.4.2-59581ab.0":
+  version "0.4.2-59581ab.0"
+  resolved "https://registry.yarnpkg.com/@brillionfi/wallet-infra-sdk/-/wallet-infra-sdk-0.4.2-59581ab.0.tgz#0a72e8f9341d934b14dfb56efb312954bbf437d5"
+  integrity sha512-eMLE5oK/ngdwvhRxev0/EnBtkeWigme7GoefzB4WV/uGWzmSuCdgiFrQR7OtxrcQdG1L5XRQFenA+q5Bx9fl1w==
   dependencies:
     "@types/jest" "^29.5.12"
     "@types/node" "^20.13.0"

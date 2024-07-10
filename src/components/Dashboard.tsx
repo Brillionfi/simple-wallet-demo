@@ -1,7 +1,8 @@
-import {LoginTypes} from "@/utils/types";
-import {SessionManager} from "./SessionManager";
-import {WalletsManager} from "./Wallets/WalletsManager";
-import {useEffect} from "react";
+import { LoginTypes } from "@/utils/types";
+import { SessionManager } from "./SessionManager";
+import { WalletsManager } from "./Accounts/WalletsManager";
+import { useState } from "react";
+import { Portfolio } from "./Portfolio";
 
 export const Dashboard = ({
   json,
@@ -12,6 +13,8 @@ export const Dashboard = ({
   jwt: string;
   payload: Record<string, string>;
 }) => {
+  const [account, setAccount] = useState<string>();
+  const [chain, setChain] = useState<string>();
   const role = payload.role as LoginTypes;
   const title = payload.orgName;
   return (
@@ -20,7 +23,17 @@ export const Dashboard = ({
         {title ? "Dashboard for " + title : "Application"}
       </h1>
       <SessionManager json={json} jwt={jwt} />
-      {role === LoginTypes.WalletUser && <WalletsManager jwt={jwt} />}
+      {role === LoginTypes.WalletUser && (
+        <WalletsManager
+          jwt={jwt}
+          account={account}
+          setAccount={setAccount}
+          setChain={setChain}
+        />
+      )}
+      {account && chain && (
+        <Portfolio jwt={jwt} account={account} chain={chain} />
+      )}
     </div>
   );
 };
