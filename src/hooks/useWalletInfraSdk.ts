@@ -14,6 +14,8 @@ export const useWalletInfraSdk = () => {
       createWalletSdk(walletInfra, walletName, walletFormat),
 
     getWalletsSdk: () => getWalletsSdk(walletInfra),
+    getWalletPortfolioSdk: (address: string, chainId: ChainId) =>
+      getPortfolioSdk(walletInfra, address, chainId),
 
     getPortfolioSdk: (address: string, chain: string) =>
       getPortfolioSdk(walletInfra, address, chain),
