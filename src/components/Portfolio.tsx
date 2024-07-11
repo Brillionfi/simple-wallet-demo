@@ -50,7 +50,7 @@ export function Portfolio({
                   className={`bg-slate-50 bg-sl transition-all ${
                     txRow && txRow < index ? `mt-[${index * 40}px]` : ""
                   }`}
-                  key={`${asset.chainId}:${asset.tokenId}-1`}
+                  key={`${asset.chainId}:${asset.tokenId}-1-${index}`}
                 >
                   <td className={`${tdStyle} w-1/6`}>
                     {getChainNamesFromChainIds(asset.chainId)}
@@ -76,11 +76,11 @@ export function Portfolio({
                   </td>
                 </tr>
                 <tr
-                  key={`${asset.chainId}:${asset.tokenId}-2`}
-                  className="h-0 absolute w-full"
+                  key={`${asset.chainId}:${asset.tokenId}-2-${index}`}
+                  className="h-0 absolute w-full z-10"
                 >
                   <td
-                    className={`flex items-center bg-slate-100 transition-all absolute w-full overflow-hidden justify-between pr-8 ${
+                    className={`flex items-center bg-slate-100 transition-all absolute w-full overflow-hidden justify-between pr-[34px] py-0 ${
                       txRow === index ? "h-[39px]" : "h-0"
                     }`}
                     colSpan={5}
@@ -112,6 +112,7 @@ export function Portfolio({
                     </div>
                     <Button
                       disabled={!txTo?.length || !txValue}
+                      variant={"destructive"}
                       onClick={async () => {
                         console.log(
                           "Sending tx: ",
