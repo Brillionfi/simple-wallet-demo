@@ -1,5 +1,6 @@
 import type { IWallet } from "@brillionfi/wallet-infra-sdk";
 import { CopyHelper } from "../ui/copy";
+import { shorten } from "@/utils/shorten";
 
 export const WalletsTable = ({
   wallets,
@@ -27,7 +28,7 @@ export const WalletsTable = ({
       <tbody>
         {wallets.map((wallet, index) => (
           <tr className={`bg-slate-50 bg-sl`} key={index}>
-            <td className={`${tdStyle}`}>{wallet.owner}</td>
+            <td className={`${tdStyle} w-1/12`}>{shorten(wallet.owner!, 8)}</td>
             <td className={`${tdStyle} w-1/12`}>{wallet.format}</td>
             <td className={`${tdStyle} w-1/12`}>
               <CopyHelper
@@ -37,22 +38,13 @@ export const WalletsTable = ({
                 }}
                 selected={wallet.address === account}
                 clipboard={wallet.address as string}
-                content={`${wallet.address?.slice(
-                  0,
-                  6
-                )}...${wallet.address?.slice(
-                  wallet.address?.length - 4,
-                  wallet.address?.length
-                )}`}
+                content={shorten(wallet.address!, 5)}
               />
             </td>
-            <td className={`${tdStyle} w-1/12`}>
+            <td className={`${tdStyle}`}>
               <CopyHelper
                 clipboard={wallet.name}
-                content={`${wallet.name.slice(0, 4)}...${wallet.name.slice(
-                  wallet.name.length - 4,
-                  wallet.name.length
-                )}`}
+                content={shorten(wallet.name, 7)}
               />
             </td>
           </tr>

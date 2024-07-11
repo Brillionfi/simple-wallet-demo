@@ -14,25 +14,21 @@ export const Dashboard = ({
   payload: Record<string, string>;
 }) => {
   const [account, setAccount] = useState<string>();
-  const [chain, setChain] = useState<string>();
+  const [format, setFormat] = useState<string>();
   const role = payload.role as LoginTypes;
-  const title = payload.orgName;
   return (
     <div className="flex flex-col min-h-screen items-center gap-10 w-[600px] justify-center">
-      <h1 className="text-xl">
-        {title ? "Dashboard for " + title : "Application"}
-      </h1>
       <SessionManager json={json} jwt={jwt} />
       {role === LoginTypes.WalletUser && (
         <WalletsManager
           jwt={jwt}
           account={account}
           setAccount={setAccount}
-          setChain={setChain}
+          setChain={setFormat}
         />
       )}
-      {account && chain && (
-        <Portfolio jwt={jwt} account={account} chain={chain} />
+      {account && format && (
+        <Portfolio jwt={jwt} account={account} format={format} />
       )}
     </div>
   );
