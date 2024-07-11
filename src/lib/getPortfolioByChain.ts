@@ -1,6 +1,5 @@
 import { useWalletInfraSdk } from "@/hooks/useWalletInfraSdk";
 import { BASE_URL } from "@/utils/constants";
-import { getChainNamesFromChainIds } from "@/utils/getChainNamesFromChainIds";
 import { SUPPORTED_CHAINS } from "@brillionfi/wallet-infra-sdk/dist/models/common.models";
 import type { IWalletPortfolio } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 import { useQuery } from "@tanstack/react-query";
@@ -37,7 +36,7 @@ export const getPortfolioByChain = (
       });
       const walletPortfolios = await Promise.all(promises);
       const assets: {
-        chainId: string;
+        chainId: SUPPORTED_CHAINS;
         tokenId: string;
         balance: string;
         address?: string | undefined;
@@ -47,12 +46,11 @@ export const getPortfolioByChain = (
       walletPortfolios.forEach((walletPortfolio) => {
         walletPortfolio.portfolio.forEach((pf) => {
           assets.push({
-            chainId: getChainNamesFromChainIds(walletPortfolio.chainId),
+            chainId: walletPortfolio.chainId as SUPPORTED_CHAINS,
             ...pf,
           });
         });
       });
-      console.log(assets);
       return assets;
     },
   });
