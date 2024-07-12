@@ -3,7 +3,12 @@ import { SUPPORTED_CHAINS } from "@brillionfi/wallet-infra-sdk/dist/models/commo
 export function getChainsForFormat(format: string): SUPPORTED_CHAINS[] {
   switch (format) {
     case "ethereum":
-      return [SUPPORTED_CHAINS.ETHEREUM_SEPOLIA, SUPPORTED_CHAINS.ETHEREUM];
+      return [
+        SUPPORTED_CHAINS.ETHEREUM_SEPOLIA,
+        SUPPORTED_CHAINS.ETHEREUM,
+        SUPPORTED_CHAINS.POLYGON,
+        SUPPORTED_CHAINS.POLYGON_AMOY,
+      ];
     case "cosmos":
       return [SUPPORTED_CHAINS.COSMOS];
     case "solana":
