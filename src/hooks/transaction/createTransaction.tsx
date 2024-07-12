@@ -3,7 +3,7 @@ import {
   ITransactionUnsigned,
   WalletInfra,
 } from "@brillionfi/wallet-infra-sdk";
-import { TransactionTypeKeys } from "@brillionfi/wallet-infra-sdk/dist/models/transaction.models";
+import {TransactionTypeKeys} from "@brillionfi/wallet-infra-sdk/dist/models/transaction.models";
 
 export const createTransactionSdk = async (
   walletInfra: WalletInfra,
@@ -22,7 +22,7 @@ export const createTransactionSdk = async (
     chainId: chainId,
   };
 
-  walletInfra.Wallet.setGasConfig(fromAddress, chainId, {
+  await walletInfra.Wallet.setGasConfig(fromAddress, chainId, {
     gasLimit: "21000",
     maxFeePerGas: "103093310316",
     maxPriorityFeePerGas: "500000000",
