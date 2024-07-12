@@ -7,7 +7,6 @@ export function getChainsForFormat(format: string): SUPPORTED_CHAINS[] {
         SUPPORTED_CHAINS.ETHEREUM_SEPOLIA,
         SUPPORTED_CHAINS.ETHEREUM,
         SUPPORTED_CHAINS.POLYGON,
-        SUPPORTED_CHAINS.POLYGON_AMOY,
       ];
     case "cosmos":
       return [SUPPORTED_CHAINS.COSMOS];
