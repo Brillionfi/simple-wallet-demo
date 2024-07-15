@@ -1,5 +1,5 @@
 import { useWalletInfraSdk } from "@/hooks/useWalletInfraSdk";
-import { BASE_URL } from "@/utils/constants";
+import { B2B_API_URL } from "@/utils/constants";
 import type { IWallet } from "@brillionfi/wallet-infra-sdk";
 import { useQuery } from "@tanstack/react-query";
 
@@ -15,7 +15,7 @@ export const getWallets = (jwt: string) => {
         const wallets: IWallet[] = await getWalletsSdk();
         return wallets;
       } else {
-        const response = await fetch(`${BASE_URL}/wallets`, {
+        const response = await fetch(`${B2B_API_URL}/wallets`, {
           method: "GET",
           headers: {
             Authorization: `Bearer ${jwt}`,

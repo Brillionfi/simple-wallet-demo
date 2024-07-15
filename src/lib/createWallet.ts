@@ -1,4 +1,5 @@
-import { BASE_URL } from "@/utils/constants";
+
+import { B2B_API_URL } from "@/utils/constants";
 import { v4 as uuidv4 } from "uuid";
 import { getWebAuthnAttestation } from "@turnkey/http";
 import { type ChainId } from "@brillionfi/wallet-infra-sdk";
@@ -44,7 +45,7 @@ export async function createWallet(chain: ChainId, token: string) {
     },
   });
 
-  const response = await fetch(`${BASE_URL}/wallets`, {
+  const response = await fetch(`${B2B_API_URL}/wallets`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

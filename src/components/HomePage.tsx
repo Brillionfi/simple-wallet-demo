@@ -53,7 +53,7 @@ export default function Page() {
     return (
       <WalletInfraProvider
         appId={appId}
-        baseUrl={process.env.NEXT_PUBLIC_BASE_URL as string}
+        baseUrl={process.env.NEXT_PUBLIC_API_URL as string}
         jwt={jwt}
       >
         {content}
