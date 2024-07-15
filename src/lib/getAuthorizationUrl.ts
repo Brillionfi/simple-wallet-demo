@@ -1,13 +1,13 @@
-import {BASE_URL} from "@/utils/constants";
+import {B2B_API_URL,BASE_URL} from "@/utils/constants";
 import {LoginTypes, OAuthProviders} from "@/utils/types";
 
 export function getAuthorizationUrl(loginType: LoginTypes, appId?: string) {
   const params = {
     oAuthProvider: OAuthProviders.Google,
     loginType,
-    redirectUrl: "http://localhost:3000/home",
+    redirectUrl: `${BASE_URL}/home`,
   };
-  const url = new URL(`${BASE_URL}/users/login`);
+  const url = new URL(`${B2B_API_URL}/users/login`);
   const query = new URLSearchParams(appId ? {...params, appId} : params);
   url.search = query.toString();
   return url;
