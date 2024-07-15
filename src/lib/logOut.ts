@@ -1,4 +1,4 @@
-import { B2B_API_URL } from "@/utils/constants";
+import { B2B_API_URL, BASE_URL } from "@/utils/constants";
 
 export async function logOut(jwt: string) {
   document.cookie = "session-wallet=";
@@ -8,5 +8,5 @@ export async function logOut(jwt: string) {
       Authorization: `Bearer ${jwt}`,
     },
   });
-  window.location.href = process.env.NEXT_PUBLIC_BASE_URL;
+  window.location.href = BASE_URL;
 }
