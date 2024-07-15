@@ -8,5 +8,5 @@ export async function logOut(jwt: string) {
       Authorization: `Bearer ${jwt}`,
     },
   });
-  window.location.href = "http://localhost:3000";
+  window.location.href = process.env.NEXT_PUBLIC_BASE_URL;
 }
