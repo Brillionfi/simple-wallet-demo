@@ -18,7 +18,7 @@ export default function Home() {
     if (process.env.NEXT_PUBLIC_USE_SDK === "true") {
       return getAuthorizationUrlSdk(appId);
     } else {
-      return getAuthorizationUrl(LoginTypes.ApiUser, appId);
+      return getAuthorizationUrl(LoginTypes.WalletUser, appId);
     }
   };
 
