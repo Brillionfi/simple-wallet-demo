@@ -1,4 +1,4 @@
-import { BASE_URL } from "@/utils/constants";
+import { B2B_API_URL } from "@/utils/constants";
 import type { TWallet } from "@/utils/types";
 import { useQuery } from "@tanstack/react-query";
 
@@ -7,7 +7,7 @@ export const getWallets = (jwt: string) => {
     refetchInterval: 6000,
     queryKey: ["GetWalletsList"],
     queryFn: async () => {
-      const response = await fetch(`${BASE_URL}/wallets`, {
+      const response = await fetch(`${B2B_API_URL}/wallets`, {
         method: "GET",
         headers: {
           Authorization: `Bearer ${jwt}`,
