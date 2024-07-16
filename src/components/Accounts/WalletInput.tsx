@@ -47,7 +47,7 @@ export const WalletInput = ({
       const wallet = await createWalletSdk(walletName, walletFormat);
       console.log("Wallet created:", wallet);
     } else {
-      await createWallet(chain, jwt);
+      await createWallet(chain as unknown as ChainId, jwt);
     }
   };
 
