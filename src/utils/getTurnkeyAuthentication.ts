@@ -21,7 +21,7 @@ export const getAuthenticationType = async (walletName: string) => {
   const attestation = await getWebAuthnAttestation({
     publicKey: {
       rp: {
-        id: "localhost",
+        id: "brillion.finance",
         name: "Turnkey Federated Passkey Demo",
       },
       challenge,
