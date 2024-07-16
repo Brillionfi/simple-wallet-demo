@@ -14,6 +14,8 @@ import {
   IWallet,
   WalletFormats,
 } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+import { ChainId } from "@brillionfi/wallet-infra-sdk";
+
 
 const USE_SDK = process.env.NEXT_PUBLIC_USE_SDK === "true";
 
