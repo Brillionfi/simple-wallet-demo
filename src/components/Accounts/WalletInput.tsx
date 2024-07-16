@@ -14,6 +14,7 @@ import {
   IWallet,
   WalletFormats,
 } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+import { ChainId } from "@brillionfi/wallet-infra-sdk";
 
 const USE_SDK = process.env.NEXT_PUBLIC_USE_SDK === "true";
 
@@ -47,7 +48,7 @@ export const WalletInput = ({
       const wallet = await createWalletSdk(walletName, walletFormat);
       console.log("Wallet created:", wallet);
     } else {
-      await createWallet(chain, jwt);
+      await createWallet(chain as unknown as ChainId, jwt);
     }
   };
 
