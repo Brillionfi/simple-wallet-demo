@@ -1,4 +1,3 @@
-
 import { B2B_API_URL, BASE_URL } from "@/utils/constants";
 
 export async function logOut(jwt: string) {
