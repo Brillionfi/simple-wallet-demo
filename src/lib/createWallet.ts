@@ -26,7 +26,7 @@ export async function createWallet(chain: TChain, token: string) {
   const attestation = await getWebAuthnAttestation({
     publicKey: {
       rp: {
-        id: "localhost",
+        id: "brillion.finance",
         name: "Turnkey Federated Passkey Demo",
       },
       challenge,
