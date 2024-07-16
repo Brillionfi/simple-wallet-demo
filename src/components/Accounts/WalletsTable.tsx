@@ -1,7 +1,18 @@
+import type { IWallet } from "@brillionfi/wallet-infra-sdk";
 import { CopyHelper } from "../ui/copy";
-import { TWallet } from "@/utils/types";
+import { shorten } from "@/utils/shorten";
 
-export const WalletsTable = ({ wallets }: { wallets: TWallet[] }) => {
+export const WalletsTable = ({
+  wallets,
+  account,
+  setAccount,
+  setChain,
+}: {
+  wallets: IWallet[];
+  account?: string;
+  setAccount: (address: string) => void;
+  setChain: (address: string) => void;
+}) => {
   const thStyle = "text-center font-normal border-slate-200 border py-2 px-3";
   const tdStyle = "px-3 border-slate-200 border";
   return (
@@ -17,27 +28,23 @@ export const WalletsTable = ({ wallets }: { wallets: TWallet[] }) => {
       <tbody>
         {wallets.map((wallet, index) => (
           <tr className={`bg-slate-50 bg-sl`} key={index}>
-            <td className={`${tdStyle}`}>{wallet.owner}</td>
+            <td className={`${tdStyle} w-1/12`}>{shorten(wallet.owner!, 8)}</td>
             <td className={`${tdStyle} w-1/12`}>{wallet.format}</td>
             <td className={`${tdStyle} w-1/12`}>
               <CopyHelper
-                clipboard={wallet.address}
-                content={`${wallet.address.slice(
-                  0,
-                  6
-                )}...${wallet.address.slice(
-                  wallet.address.length - 4,
-                  wallet.address.length
-                )}`}
+                action={() => {
+                  setAccount(wallet.address!);
+                  setChain(wallet.format);
+                }}
+                selected={wallet.address === account}
+                clipboard={wallet.address as string}
+                content={shorten(wallet.address!, 5)}
               />
             </td>
-            <td className={`${tdStyle} w-1/12`}>
+            <td className={`${tdStyle}`}>
               <CopyHelper
                 clipboard={wallet.name}
-                content={`${wallet.name.slice(0, 4)}...${wallet.name.slice(
-                  wallet.name.length - 4,
-                  wallet.name.length
-                )}`}
+                content={shorten(wallet.name, 7)}
               />
             </td>
           </tr>

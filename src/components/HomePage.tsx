@@ -1,10 +1,10 @@
-import {useSearchParams} from "next/navigation";
-import {jwtDecode} from "@/utils/jwt-decode";
-import {LoginTypes} from "@/utils/types";
-import {Dashboard} from "@/components/Dashboard";
-import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
-import {useEffect, useState} from "react";
-import {WalletInfraProvider} from "@/contexts/WalletInfraContext";
+import { useSearchParams } from "next/navigation";
+import { jwtDecode } from "@/utils/jwt-decode";
+import { LoginTypes } from "@/utils/types";
+import { Dashboard } from "@/components/Dashboard";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { WalletInfraProvider } from "@/contexts/WalletInfraContext";
 
 const queryClient = new QueryClient();
 
@@ -31,7 +31,7 @@ export default function Page() {
     }
   }, [searchParams]);
 
-  const useSdk = process.env.NEXT_PUBLIC_USE_SDK === "true";
+  const USE_SDK = process.env.NEXT_PUBLIC_USE_SDK === "true";
 
   if (
     !jwt ||
@@ -49,7 +49,7 @@ export default function Page() {
     </QueryClientProvider>
   );
 
-  if (useSdk) {
+  if (USE_SDK) {
     return (
       <WalletInfraProvider
         appId={appId}

@@ -22,6 +22,12 @@ export const createTransactionSdk = async (
     chainId: chainId,
   };
 
+  await walletInfra.Wallet.setGasConfig(fromAddress, chainId, {
+    gasLimit: "21000",
+    maxFeePerGas: "103093310316",
+    maxPriorityFeePerGas: "500000000",
+  });
+
   const transaction = await walletInfra.Transaction.createTransaction(
     newTransaction
   );

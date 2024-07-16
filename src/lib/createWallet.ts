@@ -1,9 +1,9 @@
-import {B2B_API_URL} from "@/utils/constants";
-import type {TChain} from "@/utils/types";
-import {v4 as uuidv4} from "uuid";
-import {getWebAuthnAttestation} from "@turnkey/http";
+import { B2B_API_URL } from "@/utils/constants";
+import { v4 as uuidv4 } from "uuid";
+import { getWebAuthnAttestation } from "@turnkey/http";
+import { type ChainId } from "@brillionfi/wallet-infra-sdk";
 
-export async function createWallet(chain: TChain, token: string) {
+export async function createWallet(chain: ChainId, token: string) {
   const walletName = `Wallet-${chain}-${Math.round(Math.random() * 1000000)}`;
 
   const generateRandomBuffer = (): ArrayBuffer => {

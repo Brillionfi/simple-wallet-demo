@@ -5,7 +5,7 @@ import React, {
   useEffect,
   ReactNode,
 } from "react";
-import {WalletInfra} from "@brillionfi/wallet-infra-sdk";
+import { WalletInfra } from "@brillionfi/wallet-infra-sdk";
 
 type WalletInfraContextType = WalletInfra | null;
 

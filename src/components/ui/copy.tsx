@@ -4,9 +4,13 @@ import { useEffect, useState } from "react";
 export const CopyHelper = ({
   clipboard,
   content,
+  action,
+  selected,
 }: {
   clipboard: string;
   content: string;
+  action?: () => void;
+  selected?: boolean;
 }) => {
   const [validated, showValidated] = useState(false);
   useEffect(() => {
@@ -16,14 +20,25 @@ export const CopyHelper = ({
   }, [showValidated, validated]);
   return (
     <div
-      className="flex gap-2 justify-center items-center hover:cursor-pointer p-1 text-gray-500"
-      onClick={() => {
-        navigator.clipboard.writeText(clipboard);
-        showValidated(true);
-      }}
+      className={`my-1 py-1 px-3 transition-colors rounded-md flex gap-2 justify-center items-center p-1 text-gray-500 ${
+        action ? "hover:cursor-pointer hover:bg-slate-300" : ""
+      } ${selected ? "bg-slate-300" : ""}`}
     >
-      <div>{content}</div>
-      {validated ? <Check size={15} /> : <Copy size={15} />}
+      <div onClick={action} className={``}>
+        {content}
+      </div>
+      {validated ? (
+        <Check size={15} />
+      ) : (
+        <Copy
+          size={15}
+          className="hover:cursor-pointer"
+          onClick={() => {
+            navigator.clipboard.writeText(clipboard);
+            showValidated(true);
+          }}
+        />
+      )}
     </div>
   );
 };

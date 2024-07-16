@@ -1,3 +1,5 @@
+import { WalletFormats } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+
 export enum OAuthProviders {
   Google = "Google",
 }
@@ -14,14 +16,4 @@ export type TApplication = {
   status: "ACTIVE";
 };
 
-export type TChain = "ethereum" | "cosmos" | "tron" | "solana";
-
 export type TAuthType = "passkey";
-
-export type TWallet = {
-  format: TChain;
-  address: string;
-  name: string;
-  owner: string;
-  type: string;
-};
