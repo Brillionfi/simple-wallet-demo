@@ -1,17 +1,20 @@
 import { WalletInput } from "./WalletInput";
 import { getWallets } from "@/lib/getWallets";
 import { WalletsTable } from "./WalletsTable";
+import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 
 export const WalletsManager = ({
   jwt,
   account,
   setAccount,
-  setChain,
+  setFormat,
+  setWalletType,
 }: {
   jwt: string;
   account?: string;
   setAccount: (address: string) => void;
-  setChain: (chain: string) => void;
+  setFormat: (format: WalletFormats) => void;
+  setWalletType: (walletType: WalletTypes) => void;
 }) => {
   const wallets = getWallets(jwt);
   return (
@@ -28,7 +31,8 @@ export const WalletsManager = ({
           wallets={wallets}
           account={account}
           setAccount={setAccount}
-          setChain={setChain}
+          setFormat={setFormat}
+          setWalletType={setWalletType}
         />
       )}
     </div>

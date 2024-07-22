@@ -3,6 +3,7 @@ import { SessionManager } from "./SessionManager";
 import { WalletsManager } from "./Accounts/WalletsManager";
 import { useState } from "react";
 import { Portfolio } from "./Portfolio";
+import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 
 export const Dashboard = ({
   json,
@@ -14,8 +15,9 @@ export const Dashboard = ({
   payload: Record<string, string>;
 }) => {
   const [account, setAccount] = useState<string>();
+  const [format, setFormat] = useState<WalletFormats>();
+  const [walletType, setWalletType] = useState<WalletTypes>();
 
-  const [format, setFormat] = useState<string>();
   const role = payload.role as LoginTypes;
   return (
     <div className="min-h-screen px-10 bg-white">
@@ -26,12 +28,13 @@ export const Dashboard = ({
             jwt={jwt}
             account={account}
             setAccount={setAccount}
-            setChain={setFormat}
+            setFormat={setFormat}
+            setWalletType={setWalletType}
           />
         )}
-        {account && format && (
-          <Portfolio jwt={jwt} account={account} format={format} />
-        )}
+        {account && format && walletType && (
+          <Portfolio jwt={jwt} account={account} format={format} walletType={walletType} />
+        )} 
       </div>
 
     </div>

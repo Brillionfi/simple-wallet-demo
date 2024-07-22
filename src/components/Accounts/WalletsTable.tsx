@@ -1,17 +1,20 @@
 import type { IWallet } from "@brillionfi/wallet-infra-sdk";
 import { CopyHelper } from "../ui/copy";
 import { shorten } from "@/utils/shorten";
+import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 
 export const WalletsTable = ({
   wallets,
   account,
   setAccount,
-  setChain,
+  setFormat,
+  setWalletType,
 }: {
   wallets: IWallet[];
   account?: string;
   setAccount: (address: string) => void;
-  setChain: (address: string) => void;
+  setFormat: (format: WalletFormats) => void;
+  setWalletType: (walletType: WalletTypes) => void;
 }) => {
   const thStyle = "text-center font-normal border-slate-200 border py-2 px-3";
   const tdStyle = "px-3 border-slate-200 border";
@@ -34,7 +37,8 @@ export const WalletsTable = ({
               <CopyHelper
                 action={() => {
                   setAccount(wallet.address!);
-                  setChain(wallet.format);
+                  setFormat(wallet.format);
+                  setWalletType(wallet.type);
                 }}
                 selected={wallet.address === account}
                 clipboard={wallet.address as string}
