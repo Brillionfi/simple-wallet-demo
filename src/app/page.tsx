@@ -7,11 +7,17 @@ import {getAuthorizationUrlSdk} from "@/hooks/auth/getAuthorizationUrlSdk";
 import {loginIfSession} from "@/lib/loginIfSession";
 import {LoginTypes} from "@/utils/types";
 import Link from "next/link";
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function Home() {
   const [appId, setAppId] = useState("");
+  const searchParams = useSearchParams();
 
+  useEffect(() => {
+    setAppId(searchParams?.get("appId") ?? "")
+  }, [])
+  
   loginIfSession();
 
   const getLink = () => {
