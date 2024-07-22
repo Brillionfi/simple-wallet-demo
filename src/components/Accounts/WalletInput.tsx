@@ -25,29 +25,29 @@ export const WalletInput = ({
   wallets?: IWallet[];
 }) => {
   const [key, setKey] = useState(+new Date());
-  const [chain, setChain] = useState<WalletFormats | undefined>(undefined);
+  const [format, setFormat] = useState<WalletFormats | undefined>(undefined);
   const [authType, setAuthType] = useState<TAuthType | null>(null);
   const { createWalletSdk } = useWalletInfraSdk();
 
   useEffect(() => {
-    const exists = wallets?.find((wallet) => wallet.format === chain);
+    const exists = wallets?.find((wallet) => wallet.format === format);
     if (exists) {
-      setChain(undefined);
+      setFormat(undefined);
       setKey(+new Date());
     }
-  }, [wallets, chain, setChain]);
+  }, [wallets, format, setFormat]);
 
   const handleCreateWallet = async () => {
-    if (!chain || !authType) return;
+    if (!format || !authType) return;
 
     if (USE_SDK) {
       // todo: retrieve wallet name from user input
       const walletName = "wallet-test-name";
-      const walletFormat = chain.toLowerCase() as WalletFormats;
+      const walletFormat = format.toLowerCase() as WalletFormats;
       const wallet = await createWalletSdk(walletName, walletFormat);
       console.log("Wallet created:", wallet);
     } else {
-      await createWallet(chain, jwt);
+      await createWallet(format, jwt);
     }
   };
 
@@ -57,8 +57,8 @@ export const WalletInput = ({
   return allWalletsCreated ? null : (
     <div className="flex justify-between gap-5 w-full">
       <Select
-        onValueChange={(value: WalletFormats) => setChain(value)}
-        value={chain}
+        onValueChange={(value: WalletFormats) => setFormat(value)}
+        value={format}
         key={key}
       >
         <SelectTrigger>
@@ -87,7 +87,7 @@ export const WalletInput = ({
           <SelectItem value="passkey">Passkey</SelectItem>
         </SelectContent>
       </Select>
-      <Button onClick={handleCreateWallet} disabled={!authType || !chain}>
+      <Button onClick={handleCreateWallet} disabled={!authType || !format}>
         Create
       </Button>
     </div>

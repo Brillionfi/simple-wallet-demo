@@ -2,10 +2,10 @@
 import { B2B_API_URL } from "@/utils/constants";
 import { v4 as uuidv4 } from "uuid";
 import { getWebAuthnAttestation } from "@turnkey/http";
-import { type ChainId } from "@brillionfi/wallet-infra-sdk";
+import { WalletFormats } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 
-export async function createWallet(chain: ChainId, token: string) {
-  const walletName = `Wallet-${chain}-${Math.round(Math.random() * 1000000)}`;
+export async function createWallet(format: WalletFormats, token: string) {
+  const walletName = `Wallet-${format}-${Math.round(Math.random() * 1000000)}`;
 
   const generateRandomBuffer = (): ArrayBuffer => {
     const arr = new Uint8Array(32);
@@ -56,7 +56,7 @@ export async function createWallet(chain: ChainId, token: string) {
       walletType: {
         eoa: {
           walletName,
-          walletFormat: chain,
+          walletFormat: format,
           authenticationType: {
             challenge: base64UrlEncode(challenge),
             attestation,
