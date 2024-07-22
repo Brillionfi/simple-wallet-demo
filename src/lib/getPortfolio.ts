@@ -1,6 +1,6 @@
 import { useWalletInfraSdk } from "@/hooks/useWalletInfraSdk";
-import { BASE_URL } from "@/utils/constants";
-import type { ChainId, IWallet } from "@brillionfi/wallet-infra-sdk";
+import { B2B_API_URL } from "@/utils/constants";
+import type { ChainId } from "@brillionfi/wallet-infra-sdk";
 import { IWalletPortfolio } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 import { useQuery } from "@tanstack/react-query";
 
@@ -20,7 +20,7 @@ export const getPortfolio = (jwt: string, address: string, chain: ChainId) => {
         return portfolio;
       } else {
         const response = await fetch(
-          `${BASE_URL}/wallets/portfolio/${address}/${chain}`,
+          `${B2B_API_URL}/wallets/portfolio/${address}/${chain}`,
           {
             method: "GET",
             headers: {

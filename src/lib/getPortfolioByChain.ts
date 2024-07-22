@@ -1,5 +1,5 @@
 import { useWalletInfraSdk } from "@/hooks/useWalletInfraSdk";
-import { BASE_URL } from "@/utils/constants";
+import { B2B_API_URL } from "@/utils/constants";
 import { SUPPORTED_CHAINS } from "@brillionfi/wallet-infra-sdk/dist/models/common.models";
 import type { IWalletPortfolio } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 import { useQuery } from "@tanstack/react-query";
@@ -23,7 +23,7 @@ export const getPortfolioByChain = (
           promises.push(promise);
         } else {
           const promise = fetch(
-            `${BASE_URL}/wallets/portfolio/${address}/${chain}`,
+            `${B2B_API_URL}/wallets/portfolio/${address}/${chain}`,
             {
               method: "GET",
               headers: {
