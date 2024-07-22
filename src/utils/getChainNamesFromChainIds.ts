@@ -1,6 +1,7 @@
 import { SUPPORTED_CHAINS } from "@brillionfi/wallet-infra-sdk/dist/models/common.models";
 
 export function getChainNamesFromChainIds(chainId: SUPPORTED_CHAINS): string {
+  console.log('chainId :>> ', chainId);
   switch (chainId) {
     case SUPPORTED_CHAINS.ETHEREUM:
       return "ethereum";
