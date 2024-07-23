@@ -2,6 +2,7 @@ import { LoginTypes } from "@/utils/types";
 import { SessionManager } from "./SessionManager";
 import { WalletsManager } from "./Accounts/WalletsManager";
 import { useState } from "react";
+import { Actions } from "./Actions";
 import { Portfolio } from "./Portfolio";
 import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 
@@ -21,7 +22,7 @@ export const Dashboard = ({
   const role = payload.role as LoginTypes;
   return (
     <div className="min-h-screen px-10 bg-white">
-      <div className="flex flex-col items-center gap-10 w-[600px] justify-start mt-7">
+      <div className="flex flex-col items-center gap-10 w-[800px] justify-start mt-7">
         <SessionManager json={json} jwt={jwt} />
         {role === LoginTypes.WalletUser && (
           <WalletsManager
@@ -33,7 +34,10 @@ export const Dashboard = ({
           />
         )}
         {account && format && walletType && (
-          <Portfolio jwt={jwt} account={account} format={format} walletType={walletType} />
+          <>
+            <Actions jwt={jwt} account={account} />
+            <Portfolio jwt={jwt} account={account} format={format} walletType={walletType} />
+          </>
         )} 
       </div>
 

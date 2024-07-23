@@ -4,6 +4,8 @@ import { createWalletSdk } from "./wallet/createWallet";
 import { signTransactionSdk } from "./wallet/signTransaction";
 import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 import { getWalletsSdk } from "./wallet/getWallets";
+import { getNotificationsSdk } from "./wallet/getNotifications";
+import { approveOrRejectActivitySdk } from "./wallet/activities";
 import { createTransactionSdk } from "./transaction/createTransaction";
 import { getPortfolioSdk } from "./portfolio/getPortfolio";
 import { HOSTNAME } from "@/utils/constants";
@@ -52,6 +54,38 @@ export const useWalletInfraSdk = () => {
         walletType,
         walletFormat,
         unsignedTransaction
+      ),
+
+    getNotifications:(
+      address: string,
+    ) => 
+      getNotificationsSdk(
+        walletInfra,
+        address,
+      ),
+
+    approveActivity:(
+      organizationId: string,
+      fingerprint: string,
+    ) => 
+      approveOrRejectActivitySdk(
+        walletInfra,
+        true,
+        organizationId,
+        fingerprint,
+        FromOrigin,
+      ),
+
+    rejectActivity:(
+      organizationId: string,
+      fingerprint: string,
+    ) => 
+      approveOrRejectActivitySdk(
+        walletInfra,
+        false,
+        organizationId,
+        fingerprint,
+        FromOrigin,
       ),
   };
 };

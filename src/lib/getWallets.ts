@@ -8,7 +8,7 @@ const USE_SDK = process.env.NEXT_PUBLIC_USE_SDK === "true";
 export const getWallets = (jwt: string) => {
   const { getWalletsSdk } = useWalletInfraSdk();
   const { data } = useQuery({
-    refetchInterval: 6000,
+    refetchInterval: 30000,
     queryKey: ["GetWalletsList"],
     queryFn: async () => {
       if (USE_SDK) {

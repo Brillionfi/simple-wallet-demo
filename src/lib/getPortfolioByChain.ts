@@ -13,7 +13,7 @@ export const getPortfolioByChain = (
 ) => {
   const { getPortfolioSdk } = useWalletInfraSdk();
   const { data } = useQuery({
-    refetchInterval: 6000,
+    refetchInterval: 30000,
     queryKey: [`GetPortfolio-${chains}-${address}`],
     queryFn: async () => {
       const promises: Promise<IWalletPortfolio>[] = [];

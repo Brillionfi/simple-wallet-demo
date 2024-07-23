@@ -1,14 +1,10 @@
 
 import { getPortfolioByChain } from "@/lib/getPortfolioByChain";
 import { getChainsForFormat } from "@/utils/getChainsForFormat";
-import { useState } from "react";
-import { Input } from "./ui/input";
-import { Button } from "./ui/button";
-import { useWalletInfraSdk } from "@/hooks/useWalletInfraSdk";
-import { getChainNamesFromChainIds } from "@/utils/getChainNamesFromChainIds";
 import React from "react";
 import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 import { PortfolioTable } from "./Portfolio/PortfolioTable";
+import CircularProgress from '@mui/material/CircularProgress';
 
 export function Portfolio({
   account,
@@ -32,7 +28,11 @@ export function Portfolio({
           <i className="text-xs"> - ({account})</i>
         </div>
       </div>
-      {assets && <PortfolioTable assets={assets} account={account} format={format} walletType={walletType} />}
+      {assets ? 
+        <PortfolioTable assets={assets} account={account} format={format} walletType={walletType} />
+      :
+        <CircularProgress size={15}/>
+      }
     </div>
   );
 }

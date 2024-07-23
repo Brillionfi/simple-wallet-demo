@@ -9,7 +9,7 @@ const USE_SDK = process.env.NEXT_PUBLIC_USE_SDK === "true";
 export const getPortfolio = (jwt: string, address: string, chain: ChainId) => {
   const { getPortfolioSdk } = useWalletInfraSdk();
   const { data } = useQuery({
-    refetchInterval: 6000,
+    refetchInterval: 30000,
     queryKey: ["GetPortfolio"],
     queryFn: async () => {
       if (USE_SDK) {
