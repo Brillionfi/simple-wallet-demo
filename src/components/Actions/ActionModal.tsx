@@ -108,9 +108,9 @@ export const ActionModal = ({
                   Data
                 </td>
                 <td className={`${tdStyle} text-center w-1/4`}>
-                  {Object.keys(data).map(key => {
+                  {Object.keys(data).map((key, index) => {
                     return (
-                      <p>
+                      <p key={index}>
                         {key}: {data[key]}
                       </p>
                     )
@@ -125,9 +125,9 @@ export const ActionModal = ({
                     Result
                   </td>
                   <td className={`${tdStyle} text-center w-1/4`}>
-                    {Object.keys(result).map(key => {
+                    {Object.keys(result).map((key, index) => {
                       return (
-                        <p>
+                        <p key={index}>
                           {key}: {result[key]}
                         </p>
                       )
