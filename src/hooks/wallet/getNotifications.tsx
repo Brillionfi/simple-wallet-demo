@@ -5,7 +5,6 @@ import { IWalletNotifications } from "@brillionfi/wallet-infra-sdk/dist/models/w
 
 export const getNotificationsSdk = async (
   walletInfra: WalletInfra,
-  address: string,
 ): Promise<IWalletNotifications> => {
-  return await walletInfra.Wallet.getNotifications(address);
+  return await walletInfra.Wallet.getNotifications();
 };

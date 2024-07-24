@@ -56,12 +56,9 @@ export const useWalletInfraSdk = () => {
         unsignedTransaction
       ),
 
-    getNotifications:(
-      address: string,
-    ) => 
+    getNotifications:() => 
       getNotificationsSdk(
         walletInfra,
-        address,
       ),
 
     approveActivity:(

@@ -24,6 +24,7 @@ export const Dashboard = ({
     <div className="min-h-screen px-10 bg-white">
       <div className="flex flex-col items-center gap-10 w-[800px] justify-start mt-7">
         <SessionManager json={json} jwt={jwt} />
+        <Actions jwt={jwt} />
         {role === LoginTypes.WalletUser && (
           <WalletsManager
             jwt={jwt}
@@ -34,10 +35,7 @@ export const Dashboard = ({
           />
         )}
         {account && format && walletType && (
-          <>
-            <Actions jwt={jwt} account={account} />
-            <Portfolio jwt={jwt} account={account} format={format} walletType={walletType} />
-          </>
+          <Portfolio jwt={jwt} account={account} format={format} walletType={walletType} />
         )} 
       </div>
 
