@@ -8,7 +8,8 @@ export function loginIfSession() {
     );
     const jwt = sessionCookie?.split("=")[1];
     if (jwt?.split(".").length === 3) {
-      window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/home?code=` + jwt;
+      window.location.href =
+        `${process.env.NEXT_PUBLIC_BASE_URL}/home?code=` + jwt;
     }
   }, []);
 }

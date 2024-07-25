@@ -1,13 +1,12 @@
-import {AuthProvider, WalletInfra} from "@brillionfi/wallet-infra-sdk";
+import { B2B_API_URL, BASE_URL } from "@/utils/constants";
+import { AuthProvider, WalletInfra } from "@brillionfi/wallet-infra-sdk";
 
 export function getAuthorizationUrlSdk(appId: string) {
-  const walletInfra = new WalletInfra(
-    appId,
-    process.env.NEXT_PUBLIC_API_URL as string
-  );
+  const walletInfra = new WalletInfra(appId, BASE_URL);
   const url = walletInfra.generateAuthUrl(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/home`,
+    `${B2B_API_URL}/home`,
     AuthProvider.GOOGLE
   );
+  console.log(url);
   return url;
 }
