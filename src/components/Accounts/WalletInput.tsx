@@ -53,7 +53,6 @@ export const WalletInput = ({
     <div className="flex justify-between gap-5 w-full">
       <Input
         placeholder={"Wallet name"}
-        className="h-6 m-2 w-4/6 text-xs"
         type="text"
         value={walletName}
         onChange={(e) => setWalletName(e.target.value)}
