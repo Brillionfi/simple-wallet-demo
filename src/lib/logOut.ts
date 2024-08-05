@@ -1,9 +1,9 @@
-import { B2B_API_URL, BASE_URL } from "@/utils/constants";
+import { B2B_API_URL, BASE_URL } from '../utils/constants';
 
 export async function logOut(jwt: string) {
-  document.cookie = "session-wallet=";
+  document.cookie = 'session-wallet=';
   await fetch(`${B2B_API_URL}/users/logout`, {
-    method: "GET",
+    method: 'GET',
     headers: {
       Authorization: `Bearer ${jwt}`,
     },
