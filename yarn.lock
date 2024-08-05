@@ -103,10 +103,10 @@
     "@babel/helper-validator-identifier" "^7.24.7"
     to-fast-properties "^2.0.0"
 
-"@brillionfi/wallet-infra-sdk@^0.5.1-5f2fbba.0":
-  version "0.5.1"
-  resolved "https://registry.yarnpkg.com/@brillionfi/wallet-infra-sdk/-/wallet-infra-sdk-0.5.1.tgz#b82e66abad1e298ffcbd0960e5087fa0b0881ec2"
-  integrity sha512-JM1l8BhS/lseuLetD2Jq6sOY+qPWgtSgZdUR9+sB6HCYGhwqcYvMXtVrLI2dRTyI9OBKhM47z17BhUMscQ4epQ==
+"@brillionfi/wallet-infra-sdk@0.7.1-f2bbfad.0":
+  version "0.7.1-f2bbfad.0"
+  resolved "https://registry.yarnpkg.com/@brillionfi/wallet-infra-sdk/-/wallet-infra-sdk-0.7.1-f2bbfad.0.tgz#1296b7ec8a9e56482e99db90cf77128d77726749"
+  integrity sha512-clFlniCNliPjH54Mgy+2q3bXxDvEIc7CKruVEC5SfdWyWpqOr/5xJo5LuHIC34bCFmbW2jELOSD6PalJSHSm+A==
   dependencies:
     "@turnkey/http" "^2.10.0"
     "@types/jest" "^29.5.12"
