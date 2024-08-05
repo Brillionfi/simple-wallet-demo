@@ -1,10 +1,10 @@
-import { B2B_API_URL, HOSTNAME } from "@/utils/constants";
-import { v4 as uuidv4 } from "uuid";
-import { getWebAuthnAttestation } from "@turnkey/http";
-import { WalletFormats } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+import { WalletFormats } from '@brillionfi/wallet-infra-sdk/dist/models/wallet.models';
+import { getWebAuthnAttestation } from '@turnkey/http';
+import { v4 as uuidv4 } from 'uuid';
 
-export async function createWallet(walletName: string ,format: WalletFormats, token: string) {
+import { B2B_API_URL, HOSTNAME } from '../utils/constants';
 
+export async function createWallet(walletName: string, format: WalletFormats, token: string) {
   const generateRandomBuffer = (): ArrayBuffer => {
     const arr = new Uint8Array(32);
     crypto.getRandomValues(arr);
@@ -12,11 +12,7 @@ export async function createWallet(walletName: string ,format: WalletFormats, to
   };
 
   const base64UrlEncode = (challenge: ArrayBuffer): string => {
-    return Buffer.from(challenge)
-      .toString("base64")
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_")
-      .replace(/=/g, "");
+    return Buffer.from(challenge).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
   };
 
   const challenge = generateRandomBuffer();
@@ -26,12 +22,12 @@ export async function createWallet(walletName: string ,format: WalletFormats, to
     publicKey: {
       rp: {
         id: HOSTNAME,
-        name: "Turnkey Federated Passkey Demo",
+        name: 'Turnkey Federated Passkey Demo',
       },
       challenge,
       pubKeyCredParams: [
         {
-          type: "public-key",
+          type: 'public-key',
           alg: -7,
         },
       ],
@@ -44,11 +40,11 @@ export async function createWallet(walletName: string ,format: WalletFormats, to
   });
 
   const response = await fetch(`${B2B_API_URL}/wallets`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-      "X-Idempotency-Key": uuidv4(),
+      'X-Idempotency-Key': uuidv4(),
     },
     body: JSON.stringify({
       walletType: {

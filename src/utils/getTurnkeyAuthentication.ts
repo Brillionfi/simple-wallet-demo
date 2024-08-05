@@ -1,4 +1,4 @@
-import { getWebAuthnAttestation } from "@turnkey/http";
+import { getWebAuthnAttestation } from '@turnkey/http';
 
 const generateRandomBuffer = (): ArrayBuffer => {
   const arr = new Uint8Array(32);
@@ -7,7 +7,7 @@ const generateRandomBuffer = (): ArrayBuffer => {
 };
 
 const base64UrlEncode = (challenge: ArrayBuffer): string => {
-  return Buffer.from(challenge).toString("base64").replace(/\+/g, "-").replace(/\//g, "_").replace(/=/g, "");
+  return Buffer.from(challenge).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 };
 
 export const getAuthentication = async (walletName: string) => {
@@ -17,13 +17,13 @@ export const getAuthentication = async (walletName: string) => {
   const attestation = await getWebAuthnAttestation({
     publicKey: {
       rp: {
-        id: "brillion.finance",
-        name: "Turnkey Federated Passkey Demo",
+        id: 'brillion.finance',
+        name: 'Turnkey Federated Passkey Demo',
       },
       challenge,
       pubKeyCredParams: [
         {
-          type: "public-key",
+          type: 'public-key',
           alg: -7,
         },
       ],

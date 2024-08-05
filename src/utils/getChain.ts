@@ -1,14 +1,14 @@
-import { SUPPORTED_CHAINS } from "@brillionfi/wallet-infra-sdk/dist/models/common.models";
+import { SUPPORTED_CHAINS } from '@brillionfi/wallet-infra-sdk/dist/models/common.models';
 
 export function getChain(chain: string): SUPPORTED_CHAINS {
   switch (chain) {
-    case "ethereum":
+    case 'ethereum':
       return SUPPORTED_CHAINS.ETHEREUM;
-    case "cosmos":
+    case 'cosmos':
       return SUPPORTED_CHAINS.COSMOS;
-    case "solana":
+    case 'solana':
       return SUPPORTED_CHAINS.SOLANA;
-    case "tron":
+    case 'tron':
       return SUPPORTED_CHAINS.TRON;
     default:
       return SUPPORTED_CHAINS.ETHEREUM;
