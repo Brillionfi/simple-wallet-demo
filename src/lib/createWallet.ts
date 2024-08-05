@@ -1,10 +1,9 @@
-import { B2B_API_URL } from "@/utils/constants";
+import { B2B_API_URL, HOSTNAME } from "@/utils/constants";
 import { v4 as uuidv4 } from "uuid";
 import { getWebAuthnAttestation } from "@turnkey/http";
 import { WalletFormats } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 
-export async function createWallet(format: WalletFormats, token: string) {
-  const walletName = `Wallet-${format}-${Math.round(Math.random() * 1000000)}`;
+export async function createWallet(walletName: string ,format: WalletFormats, token: string) {
 
   const generateRandomBuffer = (): ArrayBuffer => {
     const arr = new Uint8Array(32);
@@ -26,7 +25,7 @@ export async function createWallet(format: WalletFormats, token: string) {
   const attestation = await getWebAuthnAttestation({
     publicKey: {
       rp: {
-        id: "brillion.finance",
+        id: HOSTNAME,
         name: "Turnkey Federated Passkey Demo",
       },
       challenge,
@@ -56,7 +55,7 @@ export async function createWallet(format: WalletFormats, token: string) {
         eoa: {
           walletName,
           walletFormat: format,
-          authenticationType: {
+          authentication: {
             challenge: base64UrlEncode(challenge),
             attestation,
           },
