@@ -1,13 +1,11 @@
-import { useEffect } from "react";
+import { useEffect } from 'react';
 
-export function loginIfSession() {
+export function useLoginIfSession() {
   useEffect(() => {
-    const cookies = document.cookie.split(";");
-    const sessionCookie = cookies.find((strings) =>
-      strings.includes("session-wallet")
-    );
-    const jwt = sessionCookie?.split("=")[1];
-    if (jwt?.split(".").length === 3) {
+    const cookies = document.cookie.split(';');
+    const sessionCookie = cookies.find((strings) => strings.includes('session-wallet'));
+    const jwt = sessionCookie?.split('=')[1];
+    if (jwt?.split('.').length === 3) {
       window.location.href = `${process.env.NEXT_PUBLIC_BASE_URL}/home?code=` + jwt;
     }
   }, []);

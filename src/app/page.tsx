@@ -4,7 +4,7 @@ import {Button} from "@/components/ui/button";
 import {Input} from "@/components/ui/input";
 import {getAuthorizationUrl} from "@/lib/getAuthorizationUrl";
 import {getAuthorizationUrlSdk} from "@/hooks/auth/getAuthorizationUrlSdk";
-import {loginIfSession} from "@/lib/loginIfSession";
+import {useLoginIfSession} from "@/lib/loginIfSession";
 import {LoginTypes} from "@/utils/types";
 import Link from "next/link";
 import {useEffect, useState} from "react";
@@ -18,7 +18,7 @@ export default function Home() {
     setAppId(searchParams?.get("appId") ?? "")
   }, [])
   
-  loginIfSession();
+  useLoginIfSession();
 
   const getLink = () => {
     if (process.env.NEXT_PUBLIC_USE_SDK === "true") {

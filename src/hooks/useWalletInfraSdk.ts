@@ -12,36 +12,21 @@ import { HOSTNAME } from "@/utils/constants";
 
 export const useWalletInfraSdk = () => {
   const walletInfra = useWalletInfra() as WalletInfra;
-  const FromOrigin = HOSTNAME // or window.location.hostname;
-  
+  const FromOrigin = HOSTNAME; // or window.location.hostname;
+
   return {
     createWalletSdk: (walletName: string, walletFormat: WalletFormats) =>
       createWalletSdk(walletInfra, walletName, walletFormat),
 
     getWalletsSdk: () => getWalletsSdk(walletInfra),
-    getWalletPortfolioSdk: (address: string, chainId: ChainId) =>
-      getPortfolioSdk(walletInfra, address, chainId),
+    getWalletPortfolioSdk: (address: string, chainId: ChainId) => getPortfolioSdk(walletInfra, address, chainId),
 
-    getPortfolioSdk: (address: string, chain: string) =>
-      getPortfolioSdk(walletInfra, address, chain),
+    getPortfolioSdk: (address: string, chain: string) => getPortfolioSdk(walletInfra, address, chain),
 
-    createTransactionSdk: (
-      fromAddress: string,
-      toAddress: string,
-      value: string,
-      data: string,
-      chainId: ChainId
-    ) =>
-      createTransactionSdk(
-        walletInfra,
-        fromAddress,
-        toAddress,
-        value,
-        data,
-        chainId
-      ),
+    createTransactionSdk: (fromAddress: string, toAddress: string, value: string, data: string, chainId: ChainId) =>
+      createTransactionSdk(walletInfra, fromAddress, toAddress, value, data, chainId),
 
-    signTransaction:(
+    signTransaction: (
       address: string,
       walletType: WalletTypes,
       walletFormat: WalletFormats,

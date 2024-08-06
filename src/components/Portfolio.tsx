@@ -1,8 +1,10 @@
 
-import { getPortfolioByChain } from "@/lib/getPortfolioByChain";
 import { getChainsForFormat } from "@/utils/getChainsForFormat";
 import React from "react";
 import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+
+
+import { useGetPortfolioByChain } from "../lib/getPortfolioByChain";
 import { PortfolioTable } from "./Portfolio/PortfolioTable";
 import CircularProgress from '@mui/material/CircularProgress';
 
@@ -18,7 +20,7 @@ export function Portfolio({
   walletType: WalletTypes;
 }) {
   const chains = getChainsForFormat(format);
-  const assets = getPortfolioByChain(jwt, account, chains);
+  const assets = useGetPortfolioByChain(jwt, account, chains);
 
   return (
     <div className="flex gap-5 flex-col w-full">
