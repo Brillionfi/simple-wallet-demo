@@ -7,7 +7,7 @@ export const createWalletSdk = async (walletInfra: WalletInfra, walletName: stri
     type: WalletTypes.EOA,
     name: walletName,
     format: walletFormat,
-    authentication: await getAuthentication(walletName),
+    authenticationType: await getAuthentication(walletName),
   };
 
   const wallet = await walletInfra.Wallet.createWallet(newWallet);
