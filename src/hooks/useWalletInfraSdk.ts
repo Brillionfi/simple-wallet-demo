@@ -1,13 +1,13 @@
-import { ChainId, WalletInfra } from '@brillionfi/wallet-infra-sdk';
-import { WalletFormats, WalletTypes } from '@brillionfi/wallet-infra-sdk/dist/models/wallet.models';
-
-import { getPortfolioSdk } from './portfolio/getPortfolio';
-import { createTransactionSdk } from './transaction/createTransaction';
-import { createWalletSdk } from './wallet/createWallet';
-import { getWalletsSdk } from './wallet/getWallets';
-import { signTransactionSdk } from './wallet/signTransaction';
-import { useWalletInfra } from '../contexts/WalletInfraContext';
-import { HOSTNAME } from '../utils/constants';
+import { ChainId, WalletInfra } from "@brillionfi/wallet-infra-sdk";
+import { useWalletInfra } from "@/contexts/WalletInfraContext";
+import { createWalletSdk } from "./wallet/createWallet";
+import { signTransactionSdk } from "./wallet/signTransaction";
+import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+import { getWalletsSdk } from "./wallet/getWallets";
+import { getNotificationsSdk } from "./wallet/getNotifications";
+import { ApproveTransactionSdk, createTransactionSdk, RejectTransactionSdk } from "./transaction/createTransaction";
+import { getPortfolioSdk } from "./portfolio/getPortfolio";
+import { HOSTNAME } from "@/utils/constants";
 
 export const useWalletInfraSdk = () => {
   const walletInfra = useWalletInfra() as WalletInfra;
@@ -30,6 +30,45 @@ export const useWalletInfraSdk = () => {
       walletType: WalletTypes,
       walletFormat: WalletFormats,
       unsignedTransaction: string,
-    ) => signTransactionSdk(walletInfra, FromOrigin, address, walletType, walletFormat, unsignedTransaction),
+    ) => 
+      signTransactionSdk(
+        walletInfra,
+        FromOrigin,
+        address,
+        walletType,
+        walletFormat,
+        unsignedTransaction
+      ),
+
+    getNotifications:() => 
+      getNotificationsSdk(
+        walletInfra,
+      ),
+
+    approveTransaction:(
+      address: string,
+      organizationId: string,
+      fingerprint: string,
+    ) => 
+      ApproveTransactionSdk(
+        walletInfra,
+        address,
+        organizationId,
+        fingerprint,
+        FromOrigin,
+      ),
+
+    rejectTransaction:(
+      address: string,
+      organizationId: string,
+      fingerprint: string,
+    ) => 
+      RejectTransactionSdk(
+        walletInfra,
+        address,
+        organizationId,
+        fingerprint,
+        FromOrigin,
+      ),
   };
 };
