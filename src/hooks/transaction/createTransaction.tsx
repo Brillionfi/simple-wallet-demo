@@ -4,6 +4,7 @@ import {
   WalletInfra,
 } from "@brillionfi/wallet-infra-sdk";
 import {TransactionTypeKeys} from "@brillionfi/wallet-infra-sdk/dist/models/transaction.models";
+import { IWalletSignTransactionResponse } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 
 export const createTransactionSdk = async (
   walletInfra: WalletInfra,
@@ -33,4 +34,24 @@ export const createTransactionSdk = async (
   );
 
   return transaction;
+};
+
+export const ApproveTransactionSdk = async (
+  walletInfra: WalletInfra,
+  address: string,
+  organizationId: string,
+  fingerprint: string,
+  fromOrigin: string,
+): Promise<IWalletSignTransactionResponse> => {
+  return await walletInfra.Wallet.approveTransaction(address, organizationId, fingerprint, fromOrigin);
+};
+
+export const RejectTransactionSdk = async (
+  walletInfra: WalletInfra,
+  address: string,
+  organizationId: string,
+  fingerprint: string,
+  fromOrigin: string,
+): Promise<IWalletSignTransactionResponse> => {
+  return await walletInfra.Wallet.rejectTransaction(address, organizationId, fingerprint, fromOrigin);
 };

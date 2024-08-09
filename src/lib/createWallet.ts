@@ -1,11 +1,10 @@
-import { B2B_API_URL } from "@/utils/constants";
-import { v4 as uuidv4 } from "uuid";
-import { getWebAuthnAttestation } from "@turnkey/http";
-import { WalletFormats } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+import { WalletFormats } from '@brillionfi/wallet-infra-sdk/dist/models/wallet.models';
+import { getWebAuthnAttestation } from '@turnkey/http';
+import { v4 as uuidv4 } from 'uuid';
 
-export async function createWallet(format: WalletFormats, token: string) {
-  const walletName = `Wallet-${format}-${Math.round(Math.random() * 1000000)}`;
+import { B2B_API_URL, HOSTNAME } from '../utils/constants';
 
+export async function createWallet(walletName: string, format: WalletFormats, token: string) {
   const generateRandomBuffer = (): ArrayBuffer => {
     const arr = new Uint8Array(32);
     crypto.getRandomValues(arr);
@@ -13,11 +12,7 @@ export async function createWallet(format: WalletFormats, token: string) {
   };
 
   const base64UrlEncode = (challenge: ArrayBuffer): string => {
-    return Buffer.from(challenge)
-      .toString("base64")
-      .replace(/\+/g, "-")
-      .replace(/\//g, "_")
-      .replace(/=/g, "");
+    return Buffer.from(challenge).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
   };
 
   const challenge = generateRandomBuffer();
@@ -26,13 +21,13 @@ export async function createWallet(format: WalletFormats, token: string) {
   const attestation = await getWebAuthnAttestation({
     publicKey: {
       rp: {
-        id: "brillion.finance",
-        name: "Turnkey Federated Passkey Demo",
+        id: HOSTNAME,
+        name: 'Turnkey Federated Passkey Demo',
       },
       challenge,
       pubKeyCredParams: [
         {
-          type: "public-key",
+          type: 'public-key',
           alg: -7,
         },
       ],
@@ -45,11 +40,11 @@ export async function createWallet(format: WalletFormats, token: string) {
   });
 
   const response = await fetch(`${B2B_API_URL}/wallets`, {
-    method: "POST",
+    method: 'POST',
     headers: {
-      "Content-Type": "application/json",
+      'Content-Type': 'application/json',
       Authorization: `Bearer ${token}`,
-      "X-Idempotency-Key": uuidv4(),
+      'X-Idempotency-Key': uuidv4(),
     },
     body: JSON.stringify({
       walletType: {

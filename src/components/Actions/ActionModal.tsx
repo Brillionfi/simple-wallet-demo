@@ -16,7 +16,7 @@ export const ActionModal = ({
   handleClose: () => void;
   action: Notification
 }) => {
-  const {approveActivity, rejectActivity} = useWalletInfraSdk();
+  const {approveTransaction, rejectTransaction} = useWalletInfraSdk();
   const type = action.type.startsWith("ACTIVITY_TYPE_") ? action.type.split("ACTIVITY_TYPE_")[1] : action.type
   const status = action.status.startsWith("ACTIVITY_STATUS_") ? action.status.split("ACTIVITY_STATUS_")[1] : action.status
   const data = (action.intent as any)[Object.keys(action.intent)[0]]
@@ -148,20 +148,20 @@ export const ActionModal = ({
                         const decision = (vote as any).selection.includes("VOTE_SELECTION_") ? (vote as any).selection.split("VOTE_SELECTION_")[1] : (vote as any).selection;
                         const decisionColor = !decision.toLowerCase().includes("approved") ? "text-rose-500" : "text-teal-500";
                         return (
-                              <tr
-                                key={index} 
-                                className={`bg-slate-50 bg-sl transition-all`}
-                              >
-                                <td className={`${tdStyle} text-center w-1/4`}>
-                                  {(vote as any).user.userName}
-                                </td>
-                                <td className={`${tdStyle} text-center w-1/4`}>
-                                  {(vote as any).user.userEmail}
-                                </td>
-                                <td className={`${tdStyle} ${decisionColor} text-center w-1/4`}>
-                                  {decision}
-                                </td>
-                              </tr>
+                          <tr
+                            key={index} 
+                            className={`bg-slate-50 bg-sl transition-all`}
+                          >
+                            <td className={`${tdStyle} text-center w-1/4`}>
+                              {(vote as any).user.userName}
+                            </td>
+                            <td className={`${tdStyle} text-center w-1/4`}>
+                              {(vote as any).user.userEmail}
+                            </td>
+                            <td className={`${tdStyle} ${decisionColor} text-center w-1/4`}>
+                              {decision}
+                            </td>
+                          </tr>
                         )}
                       )}
                     </tbody>
@@ -176,14 +176,14 @@ export const ActionModal = ({
           <div className='flex justify-around items-center '>
             <Button
               onClick={() => {
-                approveActivity(action.organizationId, action.fingerprint)
+                approveTransaction(action.eoa, action.organizationId, action.fingerprint)
               }}
             >
               Approve
             </Button>
             <Button
               onClick={() => {
-                rejectActivity(action.organizationId, action.fingerprint)
+                rejectTransaction(action.eoa, action.organizationId, action.fingerprint)
               }}
               variant={"destructive"}
             >
