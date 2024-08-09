@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@brillionfi/wallet-infra-sdk": "^0.5.1-5f2fbba.0",
+    "@brillionfi/wallet-infra-sdk": "0.8.1-9fee6e9.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.16.0",

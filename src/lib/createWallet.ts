@@ -56,7 +56,7 @@ export async function createWallet(format: WalletFormats, token: string) {
         eoa: {
           walletName,
           walletFormat: format,
-          authenticationType: {
+          authentication: {
             challenge: base64UrlEncode(challenge),
             attestation,
           },
