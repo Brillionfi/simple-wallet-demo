@@ -8,6 +8,7 @@ import {
 } from "../ui/select";
 import type { TAuthType } from "@/utils/types";
 import { Button } from "../ui/button";
+import { Notification } from "../ui/notification";
 import { createWallet } from "@/lib/createWallet";
 import { useWalletInfraSdk } from "@/hooks/useWalletInfraSdk";
 import {
@@ -15,7 +16,6 @@ import {
   WalletFormats,
 } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 import { Input } from "../ui/input";
-
 
 const USE_SDK = process.env.NEXT_PUBLIC_USE_SDK === "true";
 
@@ -30,17 +30,14 @@ export const WalletInput = ({
   const [format, setFormat] = useState<WalletFormats | undefined>(undefined);
   const [walletName, setWalletName] = useState<string | undefined>( undefined);
   const [authType, setAuthType] = useState<TAuthType | null>(null);
-  const { createWalletSdk } = useWalletInfraSdk();
-
+  const [errorStatus, setErrorStatus] = useState<string>("");
+  const { createWalletSdk } = useWalletInfraSdk(setErrorStatus);
   
   const handleCreateWallet = async () => {
     if (!format || !authType || !walletName) return;
-    console.log(walletName)
     if (USE_SDK) {
-      // todo: retrieve wallet name from user input
       const walletFormat = format.toLowerCase() as WalletFormats;
-      const wallet = await createWalletSdk(walletName, walletFormat);
-      console.log("Wallet created:", wallet);
+      await createWalletSdk(walletName, walletFormat);
     } else {
       await createWallet(walletName, format, jwt);
     }
@@ -51,6 +48,7 @@ export const WalletInput = ({
 
   return allWalletsCreated ? null : (
     <div className="flex justify-between gap-5 w-full">
+      <Notification message={errorStatus} resetMessage={setErrorStatus}/>
       <Input
         placeholder={"Wallet name"}
         type="text"
@@ -67,10 +65,9 @@ export const WalletInput = ({
         <SelectContent>
           {Object.values(WalletFormats).map((value, index) => {
             return (
-                <SelectItem value={value} key={index}>
-                  {value}
-                </SelectItem>
-              
+              <SelectItem value={value} key={index}>
+                {value}
+              </SelectItem>
             );
           })}
         </SelectContent>
