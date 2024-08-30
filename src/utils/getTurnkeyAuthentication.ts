@@ -10,14 +10,14 @@ const base64UrlEncode = (challenge: ArrayBuffer): string => {
   return Buffer.from(challenge).toString('base64').replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
 };
 
-export const getAuthentication = async (walletName: string, domain?: string) => {
+export const getAuthentication = async (walletName: string, domain: string) => {
   const challenge = generateRandomBuffer();
   const authenticatorUserId = generateRandomBuffer();
 
   const attestation = await getWebAuthnAttestation({
     publicKey: {
       rp: {
-        id: domain ?? 'brillion.finance',
+        id: domain,
         name: 'Turnkey Federated Passkey Demo',
       },
       challenge,

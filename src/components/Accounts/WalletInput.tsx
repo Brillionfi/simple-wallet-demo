@@ -8,7 +8,6 @@ import {
 } from "../ui/select";
 import type { TAuthType } from "@/utils/types";
 import { Button } from "../ui/button";
-import { Notification } from "../ui/notification";
 import { createWallet } from "@/lib/createWallet";
 import { useWalletInfraSdk } from "@/hooks/useWalletInfraSdk";
 import {
@@ -47,42 +46,46 @@ export const WalletInput = ({
     wallets?.length === Object.keys(WalletFormats).length;
 
   return allWalletsCreated ? null : (
-    <div className="flex justify-between gap-5 w-full">
-      <Notification message={errorStatus} resetMessage={setErrorStatus}/>
-      <Input
-        placeholder={"Wallet name"}
-        type="text"
-        value={walletName}
-        onChange={(e) => setWalletName(e.target.value)}
-      />
-      <Select
-        onValueChange={(value: WalletFormats) => setFormat(value)}
-        value={format}
-      >
-        <SelectTrigger>
-          <SelectValue placeholder="Wallet format" />
-        </SelectTrigger>
-        <SelectContent>
-          {Object.values(WalletFormats).map((value, index) => {
-            return (
-              <SelectItem value={value} key={index}>
-                {value}
-              </SelectItem>
-            );
-          })}
-        </SelectContent>
-      </Select>
-      <Select onValueChange={(value: TAuthType) => setAuthType(value)}>
-        <SelectTrigger>
-          <SelectValue placeholder="Authentication type" />
-        </SelectTrigger>
-        <SelectContent>
-          <SelectItem value="passkey">Passkey</SelectItem>
-        </SelectContent>
-      </Select>
-      <Button onClick={handleCreateWallet} disabled={!authType || !format}>
-        Create
-      </Button>
+    <div>
+      <div className="flex justify-between gap-5 w-full">
+        <Input
+          placeholder={"Wallet name"}
+          type="text"
+          value={walletName}
+          onChange={(e) => setWalletName(e.target.value)}
+        />
+        <Select
+          onValueChange={(value: WalletFormats) => setFormat(value)}
+          value={format}
+        >
+          <SelectTrigger>
+            <SelectValue placeholder="Wallet format" />
+          </SelectTrigger>
+          <SelectContent>
+            {Object.values(WalletFormats).map((value, index) => {
+              return (
+                <SelectItem value={value} key={index}>
+                  {value}
+                </SelectItem>
+              );
+            })}
+          </SelectContent>
+        </Select>
+        <Select onValueChange={(value: TAuthType) => setAuthType(value)}>
+          <SelectTrigger>
+            <SelectValue placeholder="Authentication type" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="passkey">Passkey</SelectItem>
+          </SelectContent>
+        </Select>
+        <Button onClick={handleCreateWallet} disabled={!authType || !format}>
+          Create
+        </Button>
+      </div>
+      <div>
+        <small className="text-red-500">{errorStatus}</small>
+      </div>
     </div>
   );
 };

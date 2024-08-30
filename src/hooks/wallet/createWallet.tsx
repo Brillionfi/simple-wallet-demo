@@ -2,6 +2,7 @@ import { IWallet, WalletInfra } from "@brillionfi/wallet-infra-sdk";
 import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
 import { getAuthentication } from "@/utils/getTurnkeyAuthentication";
 import { AxiosError, AxiosResponse } from 'axios';
+import { parseError } from "@/utils/common";
 
 export const createWalletSdk = async (walletInfra: WalletInfra, walletName: string, walletFormat: WalletFormats, domain: string, onError?: (message: string)=>void) => {
   const newWallet: IWallet = {
@@ -15,6 +16,6 @@ export const createWalletSdk = async (walletInfra: WalletInfra, walletName: stri
     return wallet;
   } catch (error) {
     const response = (error as AxiosError).response as AxiosResponse;
-    if(onError) onError(response.data?.message)
+    if(onError) onError(parseError(response.data?.message))
   }
 };
