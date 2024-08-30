@@ -10,13 +10,13 @@ import { getPortfolioSdk } from './portfolio/getPortfolio';
 import { HOSTNAME } from '@/utils/constants';
 import { SUPPORTED_CHAINS } from '@brillionfi/wallet-infra-sdk/dist/models';
 
-export const useWalletInfraSdk = () => {
+export const useWalletInfraSdk = (onError?: (message: string) => void) => {
   const walletInfra = useWalletInfra() as WalletInfra;
   const FromOrigin = HOSTNAME; // or window.location.hostname;
 
   return {
     createWalletSdk: (walletName: string, walletFormat: WalletFormats) =>
-      createWalletSdk(walletInfra, walletName, walletFormat),
+      createWalletSdk(walletInfra, walletName, walletFormat, HOSTNAME, onError),
 
     getWalletsSdk: () => getWalletsSdk(walletInfra),
     getWalletPortfolioSdk: (address: string, chainId: ChainId) => getPortfolioSdk(walletInfra, address, chainId),
