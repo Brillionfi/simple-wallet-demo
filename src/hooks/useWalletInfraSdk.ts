@@ -19,9 +19,8 @@ export const useWalletInfraSdk = (onError?: (message: string) => void) => {
       createWalletSdk(walletInfra, walletName, walletFormat, HOSTNAME, onError),
 
     getWalletsSdk: () => getWalletsSdk(walletInfra),
-    getWalletPortfolioSdk: (address: string, chainId: ChainId) => getPortfolioSdk(walletInfra, address, chainId),
 
-    getPortfolioSdk: (address: string, chain: string) => getPortfolioSdk(walletInfra, address, chain),
+    getPortfolioSdk: (address: string, chain: ChainId) => getPortfolioSdk(walletInfra, address, chain),
 
     createTransactionSdk: (fromAddress: string, toAddress: string, value: string, data: string, chainId: ChainId) =>
       createTransactionSdk(walletInfra, fromAddress, toAddress, value, data, chainId),

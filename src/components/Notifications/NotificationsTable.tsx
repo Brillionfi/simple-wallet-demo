@@ -1,9 +1,10 @@
 import { Button } from '../ui/button';
 import React, { useState } from 'react';
-import { NotificationsModal } from './NotificationsModel';
+import { NotificationsModal } from './NotificationsModal';
 import { TEvmReceipt, TNotifications, TWalletActivity } from '@brillionfi/wallet-infra-sdk/dist/models';
+import { TransactionsModal } from './TransactionsModal';
 
-export function NotificationsTable({ notifications }: { notifications: TNotifications }) {
+export function NotificationsTable({ notifications, eoa }: { notifications: TNotifications; eoa: string }) {
   const [showActionModal, setShowActionModal] = useState<boolean>(false);
   const [selectedNotif, setSelectedAction] = useState<TEvmReceipt | TWalletActivity>();
 
@@ -83,8 +84,20 @@ export function NotificationsTable({ notifications }: { notifications: TNotifica
             </React.Fragment>
           );
         })}
-        {selectedNotif && (
-          <NotificationsModal open={showActionModal} handleClose={closeActionModal} notification={selectedNotif} />
+        {selectedNotif && (selectedNotif as TEvmReceipt).transactionHash && (
+          <TransactionsModal
+            open={showActionModal}
+            handleClose={closeActionModal}
+            notification={selectedNotif as TEvmReceipt}
+          />
+        )}
+        {selectedNotif && (selectedNotif as TWalletActivity).organizationId && (
+          <NotificationsModal
+            open={showActionModal}
+            handleClose={closeActionModal}
+            notification={selectedNotif as TWalletActivity}
+            eoa={eoa}
+          />
         )}
       </tbody>
     </table>

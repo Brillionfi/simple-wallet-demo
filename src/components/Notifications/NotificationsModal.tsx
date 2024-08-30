@@ -3,9 +3,9 @@ import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import Sheet from '@mui/joy/Sheet';
 import { Button } from '../ui/button';
-// import { Typography } from '@mui/joy';
+import { Typography } from '@mui/joy';
 import { useWalletInfraSdk } from '@/hooks/useWalletInfraSdk';
-import { TEvmReceipt, TWalletActivity } from '@brillionfi/wallet-infra-sdk/dist/models';
+import { TWalletActivity } from '@brillionfi/wallet-infra-sdk/dist/models';
 
 export const NotificationsModal = ({
   open,
@@ -15,19 +15,19 @@ export const NotificationsModal = ({
 }: {
   open: boolean;
   handleClose: () => void;
-  notification: TEvmReceipt | TWalletActivity;
+  notification: TWalletActivity;
   eoa: string;
 }) => {
   const { approveTransaction, rejectTransaction } = useWalletInfraSdk();
-  /*  const type = notification.type.startsWith('ACTIVITY_TYPE_')
+  const type = notification.type.startsWith('ACTIVITY_TYPE_')
     ? notification.type.split('ACTIVITY_TYPE_')[1]
-    : notification.type; */
+    : notification.type;
   const status = notification.status.startsWith('ACTIVITY_STATUS_')
     ? notification.status.split('ACTIVITY_STATUS_')[1]
     : notification.status;
-  // const data = notification.intent[Object.keys(notification.intent)[0]];
-  // const result = notification.result ? (notification.result as any)[Object.keys(notification.result)[0]] : null;
-  // const tdStyle = 'p-3 border-slate-200 border break-all';
+  const data = notification.intent[Object.keys(notification.intent)[0]];
+  const result = notification.result ? (notification.result as any)[Object.keys(notification.result)[0]] : null;
+  const tdStyle = 'p-3 border-slate-200 border break-all';
   return (
     <Modal
       aria-labelledby="modal-title"
@@ -47,8 +47,8 @@ export const NotificationsModal = ({
         }}
       >
         <ModalClose variant="plain" sx={{ m: 1 }} />
-        <pre>{JSON.stringify(notification, undefined, 2)}</pre>
-        {/* <Typography component="h2" id="modal-title" level="h4" textColor="inherit" fontWeight="lg" mb={1}>
+
+        <Typography component="h2" id="modal-title" level="h4" textColor="inherit" fontWeight="lg" mb={1}>
           <table className="rounded-md overflow-hidden text-gray-500 border-solid border-slate-200 text-sm relative">
             <tbody>
               <tr className={`bg-slate-50 bg-sl transition-all`}>
@@ -63,7 +63,7 @@ export const NotificationsModal = ({
               </tr>
               <tr className={`bg-slate-50 bg-sl transition-all`}>
                 <td className={`${tdStyle} text-center w-1/6`}>Wallet</td>
-                <td className={`${tdStyle} text-center w-1/4`}>{notification.eoa}</td>
+                <td className={`${tdStyle} text-center w-1/4`}>{eoa}</td>
               </tr>
               <tr className={`bg-slate-50 bg-sl transition-all`}>
                 <td className={`${tdStyle} text-center w-1/6`}>Type</td>
@@ -76,13 +76,15 @@ export const NotificationsModal = ({
               <tr className={`bg-slate-50 bg-sl transition-all`}>
                 <td className={`${tdStyle} text-center w-1/6`}>Data</td>
                 <td className={`${tdStyle} text-center w-1/4`}>
-                  {Object.keys(data).map((key, index) => {
-                    return (
-                      <p key={index}>
-                        {key}: {data[key]}
-                      </p>
-                    );
-                  })}
+                  {typeof data === 'object' &&
+                    data !== null &&
+                    Object.keys(data).map((key: string, index) => {
+                      return (
+                        <p key={index}>
+                          {key}: {(data as Record<string, any>)[key]}
+                        </p>
+                      );
+                    })}
                 </td>
               </tr>
               {result && (
@@ -104,7 +106,7 @@ export const NotificationsModal = ({
                 <td className={`${tdStyle} text-center w-1/4`}>
                   <table className="rounded-md overflow-hidden text-gray-500 border-solid border-slate-200 text-sm relative">
                     <tbody>
-                      {notification.votes.map((vote, index) => {
+                      {notification.votes?.map((vote, index) => {
                         const decision = (vote as any).selection.includes('VOTE_SELECTION_')
                           ? (vote as any).selection.split('VOTE_SELECTION_')[1]
                           : (vote as any).selection;
@@ -125,7 +127,8 @@ export const NotificationsModal = ({
               </tr>
             </tbody>
           </table>
-        </Typography> */}
+        </Typography>
+
         {status === 'CONSENSUS_NEEDED' && (
           <div className="flex justify-around items-center ">
             <Button
