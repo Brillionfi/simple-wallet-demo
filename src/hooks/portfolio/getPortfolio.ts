@@ -7,6 +7,5 @@ export const getPortfolioSdk = async (
   address: string,
   chain: string,
 ): Promise<IWalletPortfolio> => {
-  const portfolio: IWalletPortfolio = await walletInfra.Wallet.getPortfolio(address, chain as SUPPORTED_CHAINS);
-  return portfolio;
+  return await walletInfra.Wallet.getPortfolio(address, chain as SUPPORTED_CHAINS);
 };
