@@ -42,10 +42,7 @@ export const WalletInput = ({
     }
   };
 
-  const allWalletsCreated =
-    wallets?.length === Object.keys(WalletFormats).length;
-
-  return allWalletsCreated ? null : (
+  return (
     <div>
       <div className="flex justify-between gap-5 w-full">
         <Input
