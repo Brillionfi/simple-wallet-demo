@@ -1,0 +1,10 @@
+.git
+.gitignore
+.github
+.results
+scripts
+.next
+.yarn
+docker
+node_modules
+.env*
