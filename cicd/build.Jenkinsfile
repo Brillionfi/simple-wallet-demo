@@ -3,21 +3,21 @@ def envMap = [
     NEXT_PUBLIC_API_URL: "https://api.staging.rillion.finance",
     NEXT_PUBLIC_BASE_URL: "https://wallet.platform.brillantfi.com",
     NEXT_PUBLIC_HOSTNAME: "wallet.platform.brillantfi.com",
-    NEXT_PUBLIC_USE_SDK: true
+    NEXT_PUBLIC_USE_SDK: true,
     env: "dev",
   ],
   sandbox: [
     NEXT_PUBLIC_API_URL: "https://api.sandbox.brillion.finance",
     NEXT_PUBLIC_BASE_URL: "https://wallet.platform.billionfin.com",
     NEXT_PUBLIC_HOSTNAME: "wallet.platform.billionfin.com",
-    NEXT_PUBLIC_USE_SDK: true
+    NEXT_PUBLIC_USE_SDK: true,
     env: "staging",
   ],
   prod: [
     NEXT_PUBLIC_API_URL: "https://api.platform.brillion.finance",
     NEXT_PUBLIC_BASE_URL: "https://wallet.platform.brillion.finance",
     NEXT_PUBLIC_HOSTNAME: "wallet.platform.brillion.finance",
-    NEXT_PUBLIC_USE_SDK: true
+    NEXT_PUBLIC_USE_SDK: true,
     env: "prod",
   ],
 ]
