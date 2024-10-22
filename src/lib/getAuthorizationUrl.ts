@@ -3,7 +3,7 @@ import { LoginTypes, OAuthProviders } from '../utils/types';
 
 export function getAuthorizationUrl(loginType: LoginTypes, appId?: string) {
   const params = {
-    oAuthProvider: OAuthProviders.Google,
+    provider: OAuthProviders.Google,
     loginType,
     redirectUrl: `${BASE_URL}/home`,
   };

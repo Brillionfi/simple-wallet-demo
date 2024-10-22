@@ -22,7 +22,6 @@ export const WalletsTable = ({
     <table className="rounded-md overflow-hidden text-gray-500 border-solid border-slate-200 text-sm">
       <thead className="bg-slate-100">
         <tr>
-          <th className={thStyle}>Owner</th>
           <th className={thStyle}>Format</th>
           <th className={thStyle}>Address</th>
           <th className={thStyle}>Name</th>
@@ -31,14 +30,13 @@ export const WalletsTable = ({
       <tbody>
         {wallets.map((wallet, index) => (
           <tr className={`bg-slate-50 bg-sl`} key={index}>
-            <td className={`${tdStyle} w-1/12`}>{shorten(wallet.owner!, 8)}</td>
-            <td className={`${tdStyle} w-1/12`}>{wallet.format}</td>
-            <td className={`${tdStyle} w-1/12`}>
+            <td className={`${tdStyle}`}>{wallet.format}</td>
+            <td className={`${tdStyle}`}>
               <CopyHelper
                 action={() => {
                   setAccount(wallet.address!);
                   setFormat(wallet.format);
-                  setWalletType(wallet.type);
+                  setWalletType(wallet.type!);
                 }}
                 selected={wallet.address === account}
                 clipboard={wallet.address as string}
