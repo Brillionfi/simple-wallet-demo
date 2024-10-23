@@ -47,14 +47,12 @@ export async function createWallet(walletName: string, format: WalletFormats, to
       'X-Idempotency-Key': uuidv4(),
     },
     body: JSON.stringify({
-      walletType: {
-        eoa: {
-          walletName,
-          walletFormat: format,
-          authentication: {
-            challenge: base64UrlEncode(challenge),
-            attestation,
-          },
+      walletName,
+      walletFormat: format,
+      signer: {
+        authentication: {
+          challenge: base64UrlEncode(challenge),
+          attestation,
         },
       },
     }),

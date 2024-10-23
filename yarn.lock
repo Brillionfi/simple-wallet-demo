@@ -103,12 +103,12 @@
     "@babel/helper-validator-identifier" "^7.24.7"
     to-fast-properties "^2.0.0"
 
-"@brillionfi/wallet-infra-sdk@^0.11.1-c696a76.0":
-  version "0.11.1-c696a76.0"
-  resolved "https://registry.yarnpkg.com/@brillionfi/wallet-infra-sdk/-/wallet-infra-sdk-0.11.1-c696a76.0.tgz#f6dedbb95231aa0ff21e7811bb323cdf6b92133f"
-  integrity sha512-aDtXPWOMcdVArFtH+XOeT/5hLweCJdVGQFUm4u9lfoFZU+/+RKKOWrZe35XqDrUg9Gf1CY4Tcf7qAAj4rgDlzQ==
+"@brillionfi/wallet-infra-sdk@^0.13.6-0502d3e.0":
+  version "0.13.6-0502d3e.0"
+  resolved "https://registry.yarnpkg.com/@brillionfi/wallet-infra-sdk/-/wallet-infra-sdk-0.13.6-0502d3e.0.tgz#409874c7f466f5f95eab105bc733c296f6daf3e5"
+  integrity sha512-tru4c2sd1eGOVKf6C2Zke4zTqn8+irS3zDTGlphUGzmYaiAJIsct/lZbHIwZL5c80MPq+Je3Jg+XZkouhMBm8w==
   dependencies:
-    "@nexeraid/identity-sdk" "^1.2.32"
+    "@nexeraid/identity-sdk" "1.2.32"
     "@types/jest" "^29.5.12"
     "@types/node" "^20.13.0"
     axios "^1.7.2"
@@ -602,20 +602,20 @@
     prop-types "^15.8.1"
     react-is "^18.3.1"
 
-"@nexeraid/identity-schemas@1.12.5":
-  version "1.12.5"
-  resolved "https://registry.yarnpkg.com/@nexeraid/identity-schemas/-/identity-schemas-1.12.5.tgz#8135760e3f5e0d84396d690979a465828434287e"
-  integrity sha512-YgqLw1HiFRq6zPTVCeWu6txw+t7LNVOSLbuFr3Z5M3cX+mgr32JTY5SRv+iqEduxsTk59U/ofFTs9XcShuYPSQ==
+"@nexeraid/identity-schemas@1.12.3":
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/@nexeraid/identity-schemas/-/identity-schemas-1.12.3.tgz#a070e149d9fda32b2feeb97b3ec6e60859319a64"
+  integrity sha512-DEmx2diWCfKp2btWxeVhbw/Hf6n83dGhttm5Ka4qVJEQjov7dpfL02DIPyIKBzSw2vdBbicxk8u879L6WKJi4A==
   dependencies:
     zod "^3.23.8"
     zod-to-json-schema "^3.23.2"
 
-"@nexeraid/identity-sdk@^1.2.32":
-  version "1.2.34"
-  resolved "https://registry.yarnpkg.com/@nexeraid/identity-sdk/-/identity-sdk-1.2.34.tgz#89adcb55ba16a5d26f82e0283f3860bf68832837"
-  integrity sha512-Pu0s0CXEvf60U+O2mr23NOv6TA89aeXjSzgSul+2ytL5k9jTIiW2AvM6vxP0KtInEdF1eN+Xym+GP9oU+dXSUA==
+"@nexeraid/identity-sdk@1.2.32":
+  version "1.2.32"
+  resolved "https://registry.yarnpkg.com/@nexeraid/identity-sdk/-/identity-sdk-1.2.32.tgz#36ea318ee6e74ed0d617054f077f5db083da9ba1"
+  integrity sha512-3VCyf84wu4r6AX0AR196edg3rEwUbrTGUfHMr7HLmdDRlZ9dMLCYR9EaPaOseNOkdpIMGFbbvlkI+q2EP7Yd1g==
   dependencies:
-    "@nexeraid/identity-schemas" "1.12.5"
+    "@nexeraid/identity-schemas" "1.12.3"
     zod "^3.23.8"
 
 "@next/env@14.2.3":
