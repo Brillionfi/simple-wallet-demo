@@ -45,10 +45,8 @@ export function PortfolioTable({
   }
 
   const openSendTxModal = (asset: Assets) => {
-    if(Number(asset.balance) > 0) {
       setSelectedAsset(asset)
       setShowSendTxModal(true)
-    }
   }
 
   const closeSendTxModal = () => {
@@ -92,7 +90,6 @@ export function PortfolioTable({
                   onClick={() =>
                     openSendTxModal(asset)
                   }
-                  disabled={Number(asset.balance) === 0}
                   className="h-7 m-1"
                 >
                   Send

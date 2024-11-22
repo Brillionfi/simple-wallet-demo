@@ -1,7 +1,21 @@
 import { AuthProvider, WalletInfra } from '@brillionfi/wallet-infra-sdk';
 
-export function getAuthorizationUrlSdk(appId: string) {
+type request = {
+  provider: AuthProvider, appId: string, email?: string
+}
+
+type params = {
+  provider: AuthProvider, redirectUrl: string, email?: string
+}
+
+export function getAuthorizationUrlSdk({provider, appId, email}: request) {
   const walletInfra = new WalletInfra(appId, process.env.NEXT_PUBLIC_API_URL as string);
-  const url = walletInfra.generateAuthUrl(`${process.env.NEXT_PUBLIC_BASE_URL}/home`, AuthProvider.GOOGLE);
+  const params: params = {
+    provider,
+    redirectUrl: `${process.env.NEXT_PUBLIC_BASE_URL}/home`,
+  }
+  if(email) params.email = email;
+
+  const url = walletInfra.generateAuthUrl(params);
   return url;
 }
