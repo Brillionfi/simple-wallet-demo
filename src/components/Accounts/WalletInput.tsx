@@ -61,7 +61,7 @@ export const WalletInput = ({
           <SelectContent>
             {Object.values(WalletFormats).map((value, index) => {
               return (
-                <SelectItem value={value} key={index}>
+                <SelectItem value={value} key={`walletFormats-${index}`}>
                   {value}
                 </SelectItem>
               );

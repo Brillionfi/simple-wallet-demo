@@ -44,7 +44,7 @@ export function NotificationsTable({ notifications, eoa }: { notifications: TNot
                 ? 'text-amber-500'
                 : 'text-rose-500';
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={`transactions-${index}`}>
               <tr className={`bg-slate-50 bg-sl transition-all`}>
                 <td className={`${tdStyle} text-center w-1/6`}>{notif.blockHash}</td>
                 <td className={`${tdStyle} text-center w-1/4`}>{type}</td>
@@ -70,7 +70,7 @@ export function NotificationsTable({ notifications, eoa }: { notifications: TNot
                 ? 'text-amber-500'
                 : 'text-rose-500';
           return (
-            <React.Fragment key={index}>
+            <React.Fragment key={`notifications-${index}`}>
               <tr className={`bg-slate-50 bg-sl transition-all`}>
                 <td className={`${tdStyle} text-center w-1/6`}>{notif.id}</td>
                 <td className={`${tdStyle} text-center w-1/4`}>{type}</td>

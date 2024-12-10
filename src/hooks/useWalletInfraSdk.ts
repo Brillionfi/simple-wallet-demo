@@ -15,6 +15,8 @@ export const useWalletInfraSdk = (onError?: (message: string) => void) => {
   const FromOrigin = HOSTNAME; // or window.location.hostname;
 
   return {
+    walletInfra,
+
     createWalletSdk: (walletName: string, walletFormat: WalletFormats) =>
       createWalletSdk(walletInfra, walletName, walletFormat, HOSTNAME, onError),
 
