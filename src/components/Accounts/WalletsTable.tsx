@@ -29,7 +29,7 @@ export const WalletsTable = ({
       </thead>
       <tbody>
         {wallets.map((wallet, index) => (
-          <tr className={`bg-slate-50 bg-sl`} key={index}>
+          <tr className={`bg-slate-50 bg-sl`} key={`wallets-${index}`}>
             <td className={`${tdStyle}`}>{wallet.format}</td>
             <td className={`${tdStyle}`}>
               <CopyHelper

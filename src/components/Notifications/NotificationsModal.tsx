@@ -80,7 +80,7 @@ export const NotificationsModal = ({
                     data !== null &&
                     Object.keys(data).map((key: string, index) => {
                       return (
-                        <p key={index}>
+                        <p key={`data-${index}`}>
                           {key}: {(data as Record<string, any>)[key]}
                         </p>
                       );
@@ -93,7 +93,7 @@ export const NotificationsModal = ({
                   <td className={`${tdStyle} text-center w-1/4`}>
                     {Object.keys(result).map((key, index) => {
                       return (
-                        <p key={index}>
+                        <p key={`notif-${index}`}>
                           {key}: {result[key]}
                         </p>
                       );
@@ -114,7 +114,7 @@ export const NotificationsModal = ({
                           ? 'text-rose-500'
                           : 'text-teal-500';
                         return (
-                          <tr key={index} className={`bg-slate-50 bg-sl transition-all`}>
+                          <tr key={`votes-${index}`} className={`bg-slate-50 bg-sl transition-all`}>
                             <td className={`${tdStyle} text-center w-1/4`}>{(vote as any).user.userName}</td>
                             <td className={`${tdStyle} text-center w-1/4`}>{(vote as any).user.userEmail}</td>
                             <td className={`${tdStyle} ${decisionColor} text-center w-1/4`}>{decision}</td>

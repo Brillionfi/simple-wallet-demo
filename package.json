@@ -13,6 +13,7 @@
     "pre-commit": "yarn run prettier && yarn run eslint"
   },
   "dependencies": {
+    "@brillionfi/waas-react-sdk": "1.0.16-9f3bd67.0",
     "@brillionfi/wallet-infra-sdk": "0.15.10-3b40828.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",

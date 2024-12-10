@@ -72,7 +72,7 @@ export function PortfolioTable({
       </thead>
       <tbody>
         {assets.map((asset, index) => (
-          <React.Fragment key={index}>
+          <React.Fragment key={`token-${index}`}>
             <tr
               className={`bg-slate-50 bg-sl transition-all`}
               key={`${asset.chainId}:${asset.tokenId}-1-${index}`}
