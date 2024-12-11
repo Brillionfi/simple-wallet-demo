@@ -1,26 +1,42 @@
-
 import { getChainsForFormat } from "@/utils/getChainsForFormat";
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
-
-
-import { useGetPortfolioByChain } from "../lib/getPortfolioByChain";
-import { PortfolioTable } from "./Portfolio/PortfolioTable";
+import { Assets, PortfolioTable } from "./Portfolio/PortfolioTable";
 import CircularProgress from '@mui/material/CircularProgress';
+import { useBalance } from "@brillionfi/waas-react-sdk";
 
 export function Portfolio({
   account,
   format,
   walletType,
-  jwt,
 }: {
-  jwt: string;
   account: string;
   format: WalletFormats;
   walletType: WalletTypes;
 }) {
   const chains = getChainsForFormat(format);
-  const assets = useGetPortfolioByChain(jwt, account, chains);
+  const { getPortfolio }= useBalance();
+  const [portfolio, setPortfolio] = useState<Assets[]>();
+
+  useEffect(() => {
+    const getData = async () => {
+      const promises = [];
+      if(account && chains){
+        for (const chain of chains) {
+          promises.push(getPortfolio(account, chain));
+        }
+      }
+      const results = await Promise.all(promises);
+      const portfolios:Assets[] = [];
+      results.forEach(result => {
+        result?.portfolio.forEach(element => {
+          portfolios.push({...element, chainId: result.chainId});
+        });
+      }); 
+      if(portfolios.length > 0) setPortfolio(portfolios);
+    }
+    void getData();
+  }, [])
 
   return (
     <div className="flex gap-5 flex-col w-full">
@@ -30,8 +46,8 @@ export function Portfolio({
           <i className="text-xs"> - ({account})</i>
         </div>
       </div>
-      {assets ? 
-        <PortfolioTable assets={assets} account={account} format={format} walletType={walletType} />
+      {portfolio ? 
+        <PortfolioTable assets={portfolio} account={account} format={format} walletType={walletType} />
       :
         <CircularProgress size={15}/>
       }

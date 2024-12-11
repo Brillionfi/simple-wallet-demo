@@ -2,11 +2,8 @@ import { useSearchParams } from "next/navigation";
 import { jwtDecode } from "@/utils/jwt-decode";
 import { LoginTypes } from "@/utils/types";
 import { Dashboard } from "@/components/Dashboard";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useEffect, useState } from "react";
-import { WalletInfraProvider } from "@/contexts/WalletInfraContext";
-
-const queryClient = new QueryClient();
+import { useBrillionContext, useUser } from "@brillionfi/waas-react-sdk";
 
 export default function Page() {
   const [jwt, setJwt] = useState<string>("");
@@ -14,10 +11,14 @@ export default function Page() {
   const [json, setJson] = useState<string>("");
   const [appId, setAppId] = useState<string>("");
   const searchParams = useSearchParams();
+  const { authenticateUser } = useUser();
+  const { isReady } = useBrillionContext();
 
   useEffect(() => {
-    const jwt = searchParams?.get("code");
-    if (jwt) {
+    const jwt = searchParams?.get("code");     
+
+    if (jwt && isReady) {
+      authenticateUser(jwt);
       setJwt(jwt);
       try {
         const info = JSON.parse(jwtDecode(jwt.split(".")[1]));
@@ -29,9 +30,7 @@ export default function Page() {
         console.error("Error decoding JWT:", error);
       }
     }
-  }, [searchParams]);
-
-  const USE_SDK = process.env.NEXT_PUBLIC_USE_SDK === "true";
+  }, [isReady, searchParams]);
 
   if (
     !jwt ||
@@ -43,23 +42,7 @@ export default function Page() {
     return null;
   }
 
-  const content = (
-    <QueryClientProvider client={queryClient}>
-      <Dashboard json={json} jwt={jwt} payload={payload} />
-    </QueryClientProvider>
+  return (
+    <Dashboard json={json} jwt={jwt} payload={payload} />
   );
-
-  if (USE_SDK) {
-    return (
-      <WalletInfraProvider
-        appId={appId}
-        baseUrl={process.env.NEXT_PUBLIC_API_URL as string}
-        jwt={jwt}
-      >
-        {content}
-      </WalletInfraProvider>
-    );
-  } else {
-    return content;
-  }
 }

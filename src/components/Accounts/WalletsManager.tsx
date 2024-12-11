@@ -1,22 +1,21 @@
 import { WalletInput } from "./WalletInput";
-import { useGetWallets } from "@/lib/getWallets";
 import { WalletsTable } from "./WalletsTable";
 import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
+import { useBrillionContext, useWallet } from "@brillionfi/waas-react-sdk";
 
 export const WalletsManager = ({
-  jwt,
   account,
   setAccount,
   setFormat,
   setWalletType,
 }: {
-  jwt: string;
   account?: string;
   setAccount: (address: string) => void;
   setFormat: (format: WalletFormats) => void;
   setWalletType: (walletType: WalletTypes) => void;
 }) => {
-  const wallets = useGetWallets(jwt);
+  const { wallets } = useWallet();
+
   return (
     <div className="flex gap-5 flex-col w-full">
       <div className="flex w-full justify-between items-end">
@@ -25,10 +24,10 @@ export const WalletsManager = ({
           <i className="text-xs"> - (email based)</i>
         </div>
       </div>
-      <WalletInput jwt={jwt} wallets={wallets} />
-      {!!wallets?.length && (
+      <WalletInput />
+      {!!wallets.data?.length && (
         <WalletsTable
-          wallets={wallets}
+          wallets={wallets.data}
           account={account}
           setAccount={setAccount}
           setFormat={setFormat}
