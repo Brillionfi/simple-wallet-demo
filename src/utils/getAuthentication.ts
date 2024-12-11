@@ -18,7 +18,7 @@ export const getAuthentication = async (walletName: string, domain: string) => {
     publicKey: {
       rp: {
         id: domain,
-        name: 'Turnkey Federated Passkey Demo',
+        name: 'Passkey Demo',
       },
       challenge,
       pubKeyCredParams: [

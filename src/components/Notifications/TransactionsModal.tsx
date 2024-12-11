@@ -2,7 +2,7 @@ import * as React from 'react';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import Sheet from '@mui/joy/Sheet';
-import { TEvmReceipt, TWalletActivity } from '@brillionfi/wallet-infra-sdk/dist/models';
+import { TEvmReceipt } from '@brillionfi/wallet-infra-sdk/dist/models';
 
 export const TransactionsModal = ({
   open,

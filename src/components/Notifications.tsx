@@ -1,21 +1,37 @@
-import { getWalletNotifications } from '@/lib/getWalletNotifications';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { TNotifications, WalletFormats } from '@brillionfi/wallet-infra-sdk/dist/models';
 import { NotificationsTable } from './Notifications/NotificationsTable';
 import { getChainsForFormat } from '@/utils/getChainsForFormat';
+import { useWallet } from '@brillionfi/waas-react-sdk';
 
-export function Notifications({ jwt, address, format }: { jwt: string; address?: string; format?: WalletFormats }) {
+export function Notifications({ address, format }: { address?: string; format?: WalletFormats }) {
   const chains = getChainsForFormat(format);
-  const notifications: TNotifications | undefined = getWalletNotifications(jwt, chains, address);
+  const { getNotifications } = useWallet();
+  const [data, setData] = useState<TNotifications>();
 
+  useEffect(() => {
+    if(address && chains){
+      for (const chain of chains) {
+        getNotifications(address, chain).then((res) => {
+          if(res){
+            setData({notifications: {...res.notifications, ...data?.notifications}, transactions: {...res.transactions, ...data?.transactions}});
+          } 
+        });
+      }
+    }
+  }, [])
+  
   return (
     <div className="flex gap-5 flex-col w-full">
-      <div className="flex w-full justify-between items-end">
-        <div>
-          <h2 className="inline">Notifications</h2>
+      {data && address && <>
+        <div className="flex w-full justify-between items-end">
+          <div>
+            <h2 className="inline">Notifications</h2>
+          </div>
         </div>
-      </div>
-      {notifications && address && <NotificationsTable notifications={notifications} eoa={address} />}
+        <NotificationsTable notifications={data} eoa={address} />
+      </>
+      }
     </div>
   );
 }

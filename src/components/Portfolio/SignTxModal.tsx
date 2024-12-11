@@ -1,16 +1,16 @@
-import * as React from 'react';
 import Modal from '@mui/joy/Modal';
 import ModalClose from '@mui/joy/ModalClose';
 import Typography from '@mui/joy/Typography';
 import Sheet from '@mui/joy/Sheet';
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useWalletInfraSdk } from '@/hooks/useWalletInfraSdk';
 import { WalletFormats, WalletTypes } from '@brillionfi/wallet-infra-sdk/dist/models/wallet.models';
 import { SUPPORTED_CHAINS } from '@brillionfi/wallet-infra-sdk/dist/models/common.models';
 import { getChainNamesFromChainIds } from '@/utils/getChainNamesFromChainIds';
 import { CopyHelper } from '../ui/copy';
 import { shorten } from '@/utils/shorten';
+import { useWallet } from '@brillionfi/waas-react-sdk';
+import { useState } from 'react';
 
 export const SignTxModal = ({
   open,
@@ -27,9 +27,10 @@ export const SignTxModal = ({
   format: WalletFormats;
   walletType: WalletTypes;
 }) => {
-  const [rawTx, setRawTx] = React.useState<string>("");
-  const [signedTx, setSignedTx] = React.useState<string>("");
-  const { signTransaction } = useWalletInfraSdk();
+  const [rawTx, setRawTx] = useState<string>("");
+  const [signedTx, setSignedTx] = useState<string>("");
+  const { signTransaction } = useWallet();
+  const [errorStatus, setErrorStatus] = useState<string>("");
   const title = getChainNamesFromChainIds(chain || SUPPORTED_CHAINS.ETHEREUM);
 
   return (
@@ -84,12 +85,18 @@ export const SignTxModal = ({
 
               const signedTx = await signTransaction(
                 account,
-                walletType,
-                format,
-                toSign!,
+                {
+                  walletFormat: format,
+                  walletType: walletType,
+                  unsignedTransaction: toSign!
+                },
+                process.env.NEXT_PUBLIC_BASE_URL!
               );
-
-              setSignedTx(signedTx)
+              if(!signedTx || !signedTx.signedTransaction) {
+                setErrorStatus("error");
+                return;
+              }
+              setSignedTx(signedTx.signedTransaction)
             }}
             className="h-6"
           >
@@ -105,6 +112,9 @@ export const SignTxModal = ({
             />
           </div>
         }
+        <div>
+          <small className="text-red-500">{errorStatus}</small>
+        </div>
       </Sheet>
     </Modal>
   )

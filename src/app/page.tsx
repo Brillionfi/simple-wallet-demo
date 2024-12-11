@@ -31,13 +31,10 @@ export default function Home() {
           customProps={{
             containerStyle: {
               ...defaultStyles.container,
-              backgroundColor: 'red'
             },
             tittleStyle: {
               ...defaultStyles.tittle,
-              textAlign: "center",
             },
-            tittleText: "Login to your wallet",
           }}
         />
       </BrillionProvider>

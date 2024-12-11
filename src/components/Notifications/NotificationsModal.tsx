@@ -4,8 +4,8 @@ import ModalClose from '@mui/joy/ModalClose';
 import Sheet from '@mui/joy/Sheet';
 import { Button } from '../ui/button';
 import { Typography } from '@mui/joy';
-import { useWalletInfraSdk } from '@/hooks/useWalletInfraSdk';
 import { TWalletActivity } from '@brillionfi/wallet-infra-sdk/dist/models';
+import { useTransaction } from '@brillionfi/waas-react-sdk';
 
 export const NotificationsModal = ({
   open,
@@ -18,7 +18,8 @@ export const NotificationsModal = ({
   notification: TWalletActivity;
   eoa: string;
 }) => {
-  const { approveTransaction, rejectTransaction } = useWalletInfraSdk();
+  const { approveTransaction, rejectTransaction } = useTransaction();
+
   const type = notification.type.startsWith('ACTIVITY_TYPE_')
     ? notification.type.split('ACTIVITY_TYPE_')[1]
     : notification.type;
@@ -28,6 +29,7 @@ export const NotificationsModal = ({
   const data = notification.intent[Object.keys(notification.intent)[0]];
   const result = notification.result ? (notification.result as any)[Object.keys(notification.result)[0]] : null;
   const tdStyle = 'p-3 border-slate-200 border break-all';
+
   return (
     <Modal
       aria-labelledby="modal-title"
@@ -134,7 +136,7 @@ export const NotificationsModal = ({
             <Button
               onClick={() => {
                 const notif = notification as TWalletActivity;
-                approveTransaction(eoa, notif.organizationId, notif.fingerprint);
+                approveTransaction(eoa, notif.organizationId, notif.fingerprint, process.env.NEXT_PUBLIC_BASE_URL!);
               }}
             >
               Approve
@@ -142,7 +144,7 @@ export const NotificationsModal = ({
             <Button
               onClick={() => {
                 const notif = notification as TWalletActivity;
-                rejectTransaction(eoa, notif.organizationId, notif.fingerprint);
+                rejectTransaction(eoa, notif.organizationId, notif.fingerprint, process.env.NEXT_PUBLIC_BASE_URL!);
               }}
               variant={'destructive'}
             >

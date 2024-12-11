@@ -4,13 +4,13 @@ import ModalClose from '@mui/joy/ModalClose';
 import Sheet from '@mui/joy/Sheet';
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
-import { useWalletInfraSdk } from '@/hooks/useWalletInfraSdk';
 import { useState } from 'react';
 import { Assets } from './PortfolioTable';
 import { Typography } from '@mui/joy';
 import { getChainNamesFromChainIds } from '@/utils/getChainNamesFromChainIds';
 import { shorten } from '@/utils/shorten';
 import { CopyHelper } from '../ui/copy';
+import { useTransaction } from '@brillionfi/waas-react-sdk';
 
 export const SendTxModal = ({
   open,
@@ -26,7 +26,8 @@ export const SendTxModal = ({
   const [txTo, setTxTo] = useState<string>();
   const [txValue, setTxValue] = useState<number>();
   const [txHash, setTxHash] = useState<string>("");
-  const { createTransactionSdk } = useWalletInfraSdk();
+  const [errorStatus, setErrorStatus] = useState<string>("");
+  const { createTransaction } = useTransaction();
 
   return (
     <Modal
@@ -96,13 +97,20 @@ export const SendTxModal = ({
                 "0x",
                 asset.chainId
               );
-              const tx = await createTransactionSdk(
-                account,
-                txTo!,
-                (txValue! * 10 ** asset.decimals!).toString(),
-                "0x",
-                asset.chainId
+              const tx = await createTransaction(
+                {
+                  transactionType: "unsigned",
+                  from: account,
+                  to: txTo!,
+                  value: (txValue! * 10 ** asset.decimals!).toString(),
+                  data: "0x",
+                  chainId: asset.chainId,
+                }
               );
+              if(!tx) {
+                setErrorStatus("error");
+                return;
+              }
               setTxHash(tx.transactionHash ?? tx.transactionId);
             }}
             className="h-6"
@@ -119,6 +127,9 @@ export const SendTxModal = ({
             />
           </div>
         }
+        <div>
+          <small className="text-red-500">{errorStatus}</small>
+        </div>
       </Sheet>
     </Modal>
   )
