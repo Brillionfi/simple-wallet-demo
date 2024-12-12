@@ -15,7 +15,7 @@ export default function () {
     if(!jwt) return;
 
     const info = JSON.parse(jwtDecode(jwt.split(".")[1]));
-    setAppId(info.appId);
+    setAppId(info.appId && process.env.NEXT_PUBLIC_DEFAULT_APPID);
   }, [])
   
   return (
