@@ -99,10 +99,10 @@
   resolved "https://registry.yarnpkg.com/@brillionfi/quill-core/-/quill-core-0.0.28.tgz#43c3ec59f81e3ff70831aa4e244ea7967187371d"
   integrity sha512-v8M1pmDlNdEL3KMxLloSgwhco5IMWcJy4Jwzhz6znug27h6/AGoRJKJ3ktFN5qdxtZ5HYi6YBo372uuR7altVQ==
 
-"@brillionfi/waas-react-sdk@1.0.18-60a144e.0":
-  version "1.0.18-60a144e.0"
-  resolved "https://registry.yarnpkg.com/@brillionfi/waas-react-sdk/-/waas-react-sdk-1.0.18-60a144e.0.tgz#f3edd7ba107a80d89d55909368e767525637a35d"
-  integrity sha512-iqx2CjBioxSPlNemzWuqaSfV/AODYgkEfQXmgqdEnQ7ZfBmjN2806wYS3WuR9b3a11QY/7sHe0IU7adrfX4w9w==
+"@brillionfi/waas-react-sdk@1.0.19-4b215f9.0":
+  version "1.0.19-4b215f9.0"
+  resolved "https://registry.yarnpkg.com/@brillionfi/waas-react-sdk/-/waas-react-sdk-1.0.19-4b215f9.0.tgz#1be38d0621f600c150c4a8cae39f90e96afcfc6c"
+  integrity sha512-4sppZYZ+5nxnnGfCspAgSTAUffOd5gBM/f+rWUnpBaX3QozKmEo5RnVkV7qv2eOdJb4DZ2mJuEieshBJ6uvJEg==
   dependencies:
     "@brillionfi/quill-core" "^0.0.28"
     "@brillionfi/wallet-infra-sdk" "^0.15.16-e0f6c50.0"
