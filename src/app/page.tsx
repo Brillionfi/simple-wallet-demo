@@ -10,7 +10,7 @@ export default function Home() {
   const searchParams = useSearchParams();
 
   useEffect(() => {
-    setAppId(searchParams?.get("appId") ?? process.env.NEXT_PUBLIC_DEFAULT_APPID!)
+    setAppId(searchParams?.get("appId") ?? process.env.NEXT_PUBLIC_DEFAULT_APPID ?? "")
   }, [])
   
   useLoginIfSession();
