@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { Notifications } from './Notifications';
 import { Portfolio } from './Portfolio';
 import { WalletFormats, WalletTypes } from '@brillionfi/wallet-infra-sdk/dist/models/wallet.models';
+import { ChainSelector } from '@brillionfi/waas-react-sdk';
 
 export const Dashboard = ({ json, jwt, payload }: { json: string; jwt: string; payload: Record<string, string> }) => {
   const [account, setAccount] = useState<string>();
@@ -17,6 +18,7 @@ export const Dashboard = ({ json, jwt, payload }: { json: string; jwt: string; p
     <div className="min-h-screen px-10 bg-white">
       <div className="flex flex-col items-center gap-10 w-[800px] justify-start mt-7">
         <SessionManager json={json} jwt={jwt} />
+        <ChainSelector data={{}}/>
         <Notifications address={account} format={format} />
         {role === LoginTypes.WalletUser && (
           <WalletsManager
@@ -27,7 +29,7 @@ export const Dashboard = ({ json, jwt, payload }: { json: string; jwt: string; p
           />
         )}
         {account && format && walletType && (
-          <Portfolio account={account} format={format} walletType={walletType} />
+          <Portfolio account={account}/>
         )}
       </div>
     </div>
