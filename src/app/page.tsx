@@ -4,7 +4,7 @@ import {useLoginIfSession} from "@/lib/loginIfSession";
 import {useEffect, useState} from "react";
 import { useSearchParams } from "next/navigation";
 import { BrillionProvider, LoginForm, LoginMethods, defaultStyles } from '@brillionfi/waas-react-sdk';
-import { Modal, Sheet } from "@mui/joy";
+import { Modal } from "@mui/joy";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
     <main className="flex min-h-screen items-center gap-6 p-24">
       <BrillionProvider appId={appId} baseUrl={process.env.NEXT_PUBLIC_API_URL as string} WCProjectId={process.env.NEXT_PUBLIC_WC_PROJECT_ID as string}>
         <Button 
-          onClick={()=>setOpen(true)}
+          onClick={()=>{setOpen(true)}}
         >
           Connect Wallet
         </Button>
@@ -30,7 +30,7 @@ export default function Home() {
           aria-labelledby="modal-title"
           aria-describedby="modal-desc"
           open={open}
-          onClose={()=>setOpen(false)}
+          onClose={()=>{setOpen(false)}}
           sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}
         >
           <LoginForm 
@@ -42,7 +42,7 @@ export default function Home() {
               LoginMethods.WalletConnect, 
               LoginMethods.Email
             ]} 
-            onClose={()=>setOpen(false)}
+            onClose={()=>{setOpen(false)}}
             redirectUrl={process.env.NEXT_PUBLIC_REDIRECT_URL as string}
             customStyles={{
               containerStyle: {
