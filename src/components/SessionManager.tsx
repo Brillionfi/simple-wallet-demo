@@ -1,16 +1,19 @@
 import { logOut } from "@/lib/logOut";
 import { Button } from "./ui/button";
 import { CopyHelper } from "./ui/copy";
+import { useBrillionContext } from "@brillionfi/waas-react-sdk";
 
 export const SessionManager = ({
-  json,
   jwt,
 }: {
-  json: string;
   jwt: string;
 }) => {
+  const {sessionInfo} = useBrillionContext();
+  
+  const json = JSON.stringify(sessionInfo, undefined, 2)
   const time = Math.round((JSON.parse(json).exp - Date.now() / 1000) / 60);
   const expired = time < 0;
+
   return (
     <div className="flex gap-5 flex-col w-full">
       <div className="flex w-full justify-between items-end">

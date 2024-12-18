@@ -27,7 +27,7 @@ export function PortfolioTable() {
     getBalances(wallet, chain).then(args => {
       setAssets(args);
     });
-  }, [])
+  }, [chain])
 
   const openSignTxModal = () => {
     setShowSignTxModal(true);

@@ -72,15 +72,10 @@ export const SendTxModal = ({
               placeholder={"Value"}
               className="h-6 m-2 w-2/6 text-xs"
               type="number"
-              min={1 / 10 ** Number(asset.decimals)}
               value={txValue}
               onChange={(e) =>
                 setTxValue(
-                  Math.min(
-                    Number(asset.balance) /
-                      10 ** Number(asset.decimals),
-                    Number(e.target.value)
-                  )
+                  Number(e.target.value)
                 )
               }
             />

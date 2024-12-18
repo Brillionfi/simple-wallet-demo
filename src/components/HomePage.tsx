@@ -7,7 +7,6 @@ import { logOut } from "@/lib/logOut";
 
 export default function Page() {
   const [jwt, setJwt] = useState<string>("");
-  const [json, setJson] = useState<string>("");
   const [appId, setAppId] = useState<string>("");
   const searchParams = useSearchParams();
   const { authenticateUser } = useUser();
@@ -22,7 +21,6 @@ export default function Page() {
           await authenticateUser(jwt);
           setJwt(jwt);
           const info = JSON.parse(jwtDecode(jwt.split(".")[1]));
-          setJson(JSON.stringify(info, undefined, 2));
           document.cookie = `session-wallet=${jwt}`;
           setAppId(info.appId);
         } catch (error) {
@@ -37,13 +35,12 @@ export default function Page() {
 
   if (
     !jwt ||
-    !json ||
     !appId
   ) {
     return null;
   }
 
   return (
-    <Dashboard json={json} jwt={jwt}/>
+    <Dashboard jwt={jwt}/>
   );
 }
