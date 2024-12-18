@@ -1,15 +1,12 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
-import { getChainNamesFromChainIds } from "@/utils/getChainNamesFromChainIds";
 import React from "react";
-import { WalletFormats, WalletTypes } from "@brillionfi/wallet-infra-sdk/dist/models/wallet.models";
-import { SUPPORTED_CHAINS } from "@brillionfi/wallet-infra-sdk/dist/models/common.models";
 import { SignTxModal } from "./SignTxModal";
 import { SendTxModal } from "./SendTxModal";
+import { useBalance, useBrillionContext } from "@brillionfi/waas-react-sdk";
 
-export interface Assets {
-  chainId: SUPPORTED_CHAINS;
+export interface Asset {
   tokenId: string;
   balance: string;
   address?: string | undefined;
@@ -17,38 +14,32 @@ export interface Assets {
   tokenPriceUsd?: string | undefined;
 }
 
-export function PortfolioTable({
-  assets,
-  account,
-  format,
-  walletType,
-}: {
-  assets: Assets[];
-  account: string;
-  format: WalletFormats;
-  walletType: WalletTypes;
-}) {
+export function PortfolioTable() {
+  const { wallet, chain } = useBrillionContext();
+  const { getBalances } = useBalance();
   const [showSignTxModal, setShowSignTxModal] = useState<boolean>(false);
-  const [selectedChain, setSelectedChain] = useState<SUPPORTED_CHAINS | undefined>();
 
   const [showSendTxModal, setShowSendTxModal] = useState<boolean>(false);
-  const [selectedAsset, setSelectedAsset] = useState<Assets>();
+  const [selectedAsset, setSelectedAsset] = useState<Asset>();
+  const [assets, setAssets] = useState<Asset[]>([]);
 
-  const openSignTxModal = (chain: SUPPORTED_CHAINS) => {
-    setSelectedChain(chain)
+  useEffect(() => {
+    getBalances(wallet, chain).then(args => {
+      setAssets(args);
+    });
+  }, [])
+
+  const openSignTxModal = () => {
     setShowSignTxModal(true);
   }
 
   const closeSignTxModal = () => {
-    setSelectedChain(undefined)
     setShowSignTxModal(false);
   }
 
-  const openSendTxModal = (asset: Assets) => {
-    if(Number(asset.balance) > 0) {
-      setSelectedAsset(asset)
-      setShowSendTxModal(true)
-    }
+  const openSendTxModal = (asset: Asset) => {
+    setSelectedAsset(asset)
+    setShowSendTxModal(true)
   }
 
   const closeSendTxModal = () => {
@@ -62,7 +53,6 @@ export function PortfolioTable({
     <table className="rounded-md overflow-hidden text-gray-500 border-solid border-slate-200 text-sm relative">
       <thead className="bg-slate-100">
         <tr>
-          <th className={thStyle}>Chain</th>
           <th className={thStyle}>Token</th>
           <th className={thStyle}>Balance</th>
           <th className={thStyle}>Price</th>
@@ -75,11 +65,8 @@ export function PortfolioTable({
           <React.Fragment key={`token-${index}`}>
             <tr
               className={`bg-slate-50 bg-sl transition-all`}
-              key={`${asset.chainId}:${asset.tokenId}-1-${index}`}
+              key={`${asset.tokenId}-1-${index}`}
             >
-              <td className={`${tdStyle} w-1/6`}>
-                {getChainNamesFromChainIds(asset.chainId)}
-              </td>
               <td className={`${tdStyle} w-1/12`}>{asset.tokenId}</td>
               <td className={`${tdStyle} w-1/6 text-right`}>
                 {Number(asset.balance) / 10 ** Number(asset.decimals)}
@@ -92,7 +79,6 @@ export function PortfolioTable({
                   onClick={() =>
                     openSendTxModal(asset)
                   }
-                  disabled={Number(asset.balance) === 0}
                   className="h-7 m-1"
                 >
                   Send
@@ -100,7 +86,7 @@ export function PortfolioTable({
               </td>
               <td className={`${tdStyle} text-center w-1/5`}>
                 <Button
-                  onClick={()=>openSignTxModal(asset.chainId)}
+                  onClick={openSignTxModal}
                   className="h-7 m-1"
                 >
                   Sign
@@ -109,8 +95,8 @@ export function PortfolioTable({
             </tr>
           </React.Fragment>
         ))}
-        {selectedChain && <SignTxModal open={showSignTxModal} handleClose={closeSignTxModal} chain={selectedChain} account={account} format={format} walletType={walletType}/>}
-        {selectedAsset && <SendTxModal open={showSendTxModal} handleClose={closeSendTxModal} account={account} asset={selectedAsset}/>}
+        <SignTxModal open={showSignTxModal} handleClose={closeSignTxModal} />
+        {selectedAsset && <SendTxModal open={showSendTxModal} handleClose={closeSendTxModal} asset={selectedAsset}/>}
       </tbody>
     </table>
   );

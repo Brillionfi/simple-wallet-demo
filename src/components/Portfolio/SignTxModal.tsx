@@ -9,24 +9,18 @@ import { SUPPORTED_CHAINS } from '@brillionfi/wallet-infra-sdk/dist/models/commo
 import { getChainNamesFromChainIds } from '@/utils/getChainNamesFromChainIds';
 import { CopyHelper } from '../ui/copy';
 import { shorten } from '@/utils/shorten';
-import { useWallet } from '@brillionfi/waas-react-sdk';
+import { useBrillionContext, useWallet } from '@brillionfi/waas-react-sdk';
 import { useState } from 'react';
 
 export const SignTxModal = ({
   open,
   handleClose,
-  chain,
-  account,
-  format,
-  walletType,
 }: {
   open: boolean;
   handleClose: () => void;
-  chain: SUPPORTED_CHAINS;
-  account: string;
-  format: WalletFormats;
-  walletType: WalletTypes;
 }) => {
+  const { wallet, chain } = useBrillionContext();
+
   const [rawTx, setRawTx] = useState<string>("");
   const [signedTx, setSignedTx] = useState<string>("");
   const { signTransaction } = useWallet();
@@ -84,10 +78,10 @@ export const SignTxModal = ({
               if(toSign?.startsWith("0x")) toSign = toSign.substring(2);
 
               const signedTx = await signTransaction(
-                account,
+                wallet,
                 {
-                  walletFormat: format,
-                  walletType: walletType,
+                  walletFormat: WalletFormats.ETHEREUM,
+                  walletType: WalletTypes.EOA,
                   unsignedTransaction: toSign!
                 },
                 process.env.NEXT_PUBLIC_BASE_URL!

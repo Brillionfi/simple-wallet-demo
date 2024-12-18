@@ -5,24 +5,24 @@ import Sheet from '@mui/joy/Sheet';
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
 import { useState } from 'react';
-import { Assets } from './PortfolioTable';
+import { Asset } from './PortfolioTable';
 import { Typography } from '@mui/joy';
 import { getChainNamesFromChainIds } from '@/utils/getChainNamesFromChainIds';
 import { shorten } from '@/utils/shorten';
 import { CopyHelper } from '../ui/copy';
-import { useTransaction } from '@brillionfi/waas-react-sdk';
+import { useBrillionContext, useTransaction } from '@brillionfi/waas-react-sdk';
 
 export const SendTxModal = ({
   open,
   handleClose,
-  account,
   asset,
 }: {
   open: boolean;
   handleClose: () => void;
-  account: string;
-  asset: Assets
+  asset: Asset
 }) => {
+  const { wallet, chain } = useBrillionContext();
+
   const [txTo, setTxTo] = useState<string>();
   const [txValue, setTxValue] = useState<number>();
   const [txHash, setTxHash] = useState<string>("");
@@ -57,7 +57,7 @@ export const SendTxModal = ({
           fontWeight="lg"
           mb={1}
         >
-          Sending {asset.tokenId} on {getChainNamesFromChainIds(asset.chainId)}
+          Sending {asset.tokenId} on {getChainNamesFromChainIds(chain)}
         </Typography>
         <div className='flex justify-center items-center'>
           <div className="flex">
@@ -91,20 +91,20 @@ export const SendTxModal = ({
             onClick={async () => {
               console.log(
                 "Sending tx: ",
-                account,
+                wallet,
                 txTo!,
                 (txValue! * 10 ** asset.decimals!).toString(),
                 "0x",
-                asset.chainId
+                chain
               );
               const tx = await createTransaction(
                 {
                   transactionType: "unsigned",
-                  from: account,
+                  from: wallet,
                   to: txTo!,
                   value: (txValue! * 10 ** asset.decimals!).toString(),
                   data: "0x",
-                  chainId: asset.chainId,
+                  chainId: chain,
                 }
               );
               if(!tx) {
