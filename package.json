@@ -13,7 +13,7 @@
     "pre-commit": "yarn run prettier && yarn run eslint"
   },
   "dependencies": {
-    "@brillionfi/waas-react-sdk": "1.0.22-8589e3d.0",
+    "@brillionfi/waas-react-sdk": "1.0.25-1af9389.0",
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/icons-material": "^5.16.0",
@@ -31,7 +31,8 @@
     "react-dom": "^18",
     "tailwind-merge": "^2.3.0",
     "tailwindcss-animate": "^1.0.7",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "wagmi": "^2.14.6"
   },
   "devDependencies": {
     "@commitlint/cli": "^19.3.0",

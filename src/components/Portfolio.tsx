@@ -1,4 +1,5 @@
 import { AssetsTable, useBrillionContext } from "@brillionfi/waas-react-sdk";
+import { PortfolioTable } from "./Portfolio/PortfolioTable";
 
 export function Portfolio({
   account,
@@ -9,13 +10,14 @@ export function Portfolio({
 
   return (
     <div className="flex gap-5 flex-col w-full">
+      <AssetsTable address={account}/>
       <div className="flex w-full justify-between items-end">
         <div>
           <h2 className="inline">Portfolio</h2>
           <i className="text-xs"> - ({account}) - ChainId: {chain}</i>
         </div>
       </div>
-      <AssetsTable address={account}/>
+      <PortfolioTable />
     </div>
   );
 }

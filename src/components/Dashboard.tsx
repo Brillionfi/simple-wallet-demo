@@ -1,36 +1,43 @@
-import { LoginTypes } from '@/utils/types';
 import { SessionManager } from './SessionManager';
-import { WalletsManager } from './Accounts/WalletsManager';
-import { useState } from 'react';
 import { Notifications } from './Notifications';
 import { Portfolio } from './Portfolio';
-import { WalletFormats, WalletTypes } from '@brillionfi/wallet-infra-sdk/dist/models/wallet.models';
-import { ChainSelector } from '@brillionfi/waas-react-sdk';
+import { AddressPill, ChainSelector, defaultAddressPillStyles, defaultChainSelectorStyles, useBrillionContext } from '@brillionfi/waas-react-sdk';
+import { CreateWalletModal } from '@/components/CreateWallet/CreateWalletModal';
 
-export const Dashboard = ({ json, jwt, payload }: { json: string; jwt: string; payload: Record<string, string> }) => {
-  const [account, setAccount] = useState<string>();
-  const [format, setFormat] = useState<WalletFormats>();
-  const [walletType, setWalletType] = useState<WalletTypes>();
-
-  const role = payload.role as LoginTypes;
+export const Dashboard = ({ jwt }: { jwt: string}) => {
+  const { wallet } = useBrillionContext();
 
   return (
     <div className="min-h-screen px-10 bg-white">
       <div className="flex flex-col items-center gap-10 w-[800px] justify-start mt-7">
-        <SessionManager json={json} jwt={jwt} />
-        <ChainSelector data={{}}/>
-        <Notifications address={account} format={format} />
-        {role === LoginTypes.WalletUser && (
-          <WalletsManager
-            account={account}
-            setAccount={setAccount}
-            setFormat={setFormat}
-            setWalletType={setWalletType}
-          />
-        )}
-        {account && format && walletType && (
-          <Portfolio account={account}/>
-        )}
+        <SessionManager jwt={jwt} />
+        {wallet !== "" ?
+          <>
+            <div className="flex items-center w-full justify-around">
+              <AddressPill customStyles={{
+                containerStyle:{
+                  ...defaultAddressPillStyles.container,
+                  backgroundColor: "none"
+                },
+              }}/>
+              <ChainSelector 
+                data={{
+                  enableTestNetworks: true
+                }} 
+                customStyles={{
+                  containerStyle:{
+                    ...defaultChainSelectorStyles.container,
+                    backgroundColor: "none"
+                  }
+                }}
+              />
+            </div>
+            <Portfolio account={wallet}/>
+            <Notifications />
+          </>
+          :
+          <CreateWalletModal />
+        }
       </div>
     </div>
   );

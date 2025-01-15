@@ -11,6 +11,13 @@ export default function () {
   const searchParams = useSearchParams();
 
   useEffect(() => {
+    const error = searchParams?.get("error");
+    if(error){
+      alert("Error: " + error);
+      window.location.href = "/";
+      return;
+    }
+    
     const jwt = searchParams?.get("code");
     if(!jwt) return;
 

@@ -1,35 +1,28 @@
 import React, { useEffect, useState } from 'react';
-import { TNotifications, WalletFormats } from '@brillionfi/wallet-infra-sdk/dist/models';
+import { TNotifications } from '@brillionfi/wallet-infra-sdk/dist/models';
 import { NotificationsTable } from './Notifications/NotificationsTable';
-import { getChainsForFormat } from '@/utils/getChainsForFormat';
-import { useWallet } from '@brillionfi/waas-react-sdk';
+import { useBrillionContext, useWallet } from '@brillionfi/waas-react-sdk';
 
-export function Notifications({ address, format }: { address?: string; format?: WalletFormats }) {
-  const chains = getChainsForFormat(format);
+export function Notifications() {
+  const { wallet, chain } = useBrillionContext();
   const { getNotifications } = useWallet();
   const [data, setData] = useState<TNotifications>();
 
   useEffect(() => {
-    if(address && chains){
-      for (const chain of chains) {
-        getNotifications(address, chain).then((res) => {
-          if(res){
-            setData({notifications: {...res.notifications, ...data?.notifications}, transactions: {...res.transactions, ...data?.transactions}});
-          } 
-        });
-      }
-    }
+    getNotifications(wallet, chain).then((res) => {
+      setData(res)
+    });
   }, [])
   
   return (
     <div className="flex gap-5 flex-col w-full">
-      {data && address && <>
+      {data && wallet && <>
         <div className="flex w-full justify-between items-end">
           <div>
             <h2 className="inline">Notifications</h2>
           </div>
         </div>
-        <NotificationsTable notifications={data} eoa={address} />
+        <NotificationsTable notifications={data} eoa={wallet} />
       </>
       }
     </div>
