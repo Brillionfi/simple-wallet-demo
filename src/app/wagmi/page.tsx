@@ -14,7 +14,7 @@ const queryClient = new QueryClient();
 const { brillionConnector, brillionTransport } = brillionWagmi({
   appId: process.env.NEXT_PUBLIC_DEFAULT_APPID ?? "7cd8e911-cb89-4bdf-9fa0-d5bb9563158b",
   baseUrl: process.env.NEXT_PUBLIC_API_URL as string,
-  defaultNetwork: polygon.id,
+  defaultNetwork: sepolia.id,
   WcProjectId: process.env.NEXT_PUBLIC_WC_PROJECT_ID as string
 })
 
