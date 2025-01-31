@@ -6,7 +6,7 @@ import { ChainSelector } from "@/components/ui/ChainSelector";
 export default function WagmiHomePage() {
   const { connect, connectors } = useConnect();
   const { isConnected, address, chainId } = useAccount();
-  const { sendTransaction, data, isSuccess } = useSendTransaction();
+  const { sendTransaction } = useSendTransaction();
   const { disconnect } = useDisconnect()
   const { writeContract } = useWriteContract()
   const { signMessage } = useSignMessage()
@@ -16,74 +16,6 @@ export default function WagmiHomePage() {
   const nonce = useTransactionCount({
     address,
   })
-  // const estimate = useEstimateGas({
-  //   account: address, 
-  //   to: '0xd2135CfB216b74109775236E36d4b433F1DF507B',
-  //   value: BigInt(1),
-  // })
-  // const usdtSupply = useReadContract({
-  //   abi: [{
-  //     "inputs": [],
-  //     "name": "totalSupply",
-  //     "outputs": [
-  //       {
-  //         "internalType": "uint256",
-  //         "name": "",
-  //         "type": "uint256"
-  //       }
-  //     ],
-  //     "stateMutability": "view",
-  //     "type": "function"
-  //   }],
-  //   address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-  //   functionName: 'totalSupply',
-  // })
-  // const usdt = useToken({
-  //   address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-  // })
-  // const feeHistory = useFeeHistory({
-  //   blockCount: 4,
-  //   rewardPercentiles: [25, 75]
-  // })
-  // const simulate = useSimulateContract({
-  //   abi: [{
-  //     "inputs": [
-  //       {
-  //         "internalType": "address",
-  //         "name": "from",
-  //         "type": "address"
-  //       },
-  //       {
-  //         "internalType": "address",
-  //         "name": "to",
-  //         "type": "address"
-  //       },
-  //       {
-  //         "internalType": "uint256",
-  //         "name": "amount",
-  //         "type": "uint256"
-  //       }
-  //     ],
-  //     "name": "transferFrom",
-  //     "outputs": [
-  //       {
-  //         "internalType": "bool",
-  //         "name": "",
-  //         "type": "bool"
-  //       }
-  //     ],
-  //     "stateMutability": "nonpayable",
-  //     "type": "function"
-  //   }],
-  //   address: '0xdAC17F958D2ee523a2206206994597C13D831ec7',
-  //   functionName: 'transferFrom',
-  //   args: [
-  //     address as `0x${string}`,
-  //     '0xA0Cf798816D4b9b9866b5330EEa46a18382f251e',
-  //     BigInt(1),
-  //   ],
-  // })
-  console.log('balance :>> ', balance);
 
   const BrillionConnect = (provider: string, email?: string, walletName?: string) => {
     connect({
