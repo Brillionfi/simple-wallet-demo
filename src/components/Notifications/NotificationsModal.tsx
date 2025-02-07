@@ -5,7 +5,7 @@ import Sheet from '@mui/joy/Sheet';
 import { Button } from '../ui/button';
 import { Typography } from '@mui/joy';
 import { TWalletActivity } from '@brillionfi/wallet-infra-sdk/dist/models';
-import { useTransaction } from '@brillionfi/waas-react-sdk';
+import { useTransaction, useWallet } from '@brillionfi/waas-react-sdk';
 
 export const NotificationsModal = ({
   open,
@@ -18,7 +18,12 @@ export const NotificationsModal = ({
   notification: TWalletActivity;
   eoa: string;
 }) => {
+  const { getWalletAuthnticator } = useWallet();
   const { approveTransaction, rejectTransaction } = useTransaction();
+
+  const auths = React.useMemo(async () => {
+    return getWalletAuthnticator();
+  }, [])
 
   const type = notification.type.startsWith('ACTIVITY_TYPE_')
     ? notification.type.split('ACTIVITY_TYPE_')[1]
@@ -136,7 +141,9 @@ export const NotificationsModal = ({
             <Button
               onClick={() => {
                 const notif = notification as TWalletActivity;
-                approveTransaction(eoa, notif.organizationId, notif.fingerprint, process.env.NEXT_PUBLIC_BASE_URL!);
+                console.log('auths :>> ', auths);
+                // TODO select auth before approving
+                // approveTransaction(eoa, notif.organizationId, notif.fingerprint, process.env.NEXT_PUBLIC_BASE_URL!);
               }}
             >
               Approve
@@ -144,7 +151,9 @@ export const NotificationsModal = ({
             <Button
               onClick={() => {
                 const notif = notification as TWalletActivity;
-                rejectTransaction(eoa, notif.organizationId, notif.fingerprint, process.env.NEXT_PUBLIC_BASE_URL!);
+                console.log('auths :>> ', auths);
+                // TODO select auth before approving
+                // rejectTransaction(eoa, notif.organizationId, notif.fingerprint, process.env.NEXT_PUBLIC_BASE_URL!);
               }}
               variant={'destructive'}
             >

@@ -3,7 +3,7 @@
 import {useLoginIfSession} from "@/lib/loginIfSession";
 import {useEffect, useState} from "react";
 import { useSearchParams } from "next/navigation";
-import { BrillionProvider, LoginForm, LoginMethods, defaultLoginFormStyles } from '@brillionfi/waas-react-sdk';
+import { BrillionProvider, LoginForm, LoginMethods } from '@brillionfi/waas-react-sdk';
 import { Modal } from "@mui/joy";
 import { Button } from "@/components/ui/button";
 
@@ -44,13 +44,12 @@ export default function Home() {
             ]} 
             onClose={()=>{setOpen(false)}}
             redirectUrl={process.env.NEXT_PUBLIC_REDIRECT_URL as string}
-            customStyles={{
-              containerStyle: {
-                ...defaultLoginFormStyles.container,
-              },
-              headerStyle: {
-                ...defaultLoginFormStyles.header,
-              },
+            config={{
+              showClose: false,
+              customClassNames: {
+                // contentContainer: "bg-black p-8 rounded-lg",
+                // footerContainer: "flex justify-center",
+              }
             }}
           />
         </Modal>
